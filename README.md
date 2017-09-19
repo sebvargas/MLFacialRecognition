@@ -10,6 +10,9 @@ https://docs.google.com/spreadsheets/d/1I8XX6gWBlDYND57pcETQVj78WtveGE0wQcdlFozC
 # CPSC Plan
 https://docs.google.com/document/d/1D5RLhgtwIQoQFnAnOa8iINn1u05oPitlCvCUJX2JyvU/edit
 
+# Product Backlog
+https://docs.google.com/spreadsheets/d/1D1U_9JfSLI372lYSmCiTS_RIj0skpUXs9QlWKOzzdY8/edit#gid=0
+
 # Meeting Times
 w/ Advisor Wednesday 2pm   
 w/ Group Thursday 5pm-8pm
