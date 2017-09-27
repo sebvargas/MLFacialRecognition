@@ -13,6 +13,13 @@ https://docs.google.com/document/d/1D5RLhgtwIQoQFnAnOa8iINn1u05oPitlCvCUJX2JyvU/
 # Product Backlog
 https://docs.google.com/spreadsheets/d/1D1U_9JfSLI372lYSmCiTS_RIj0skpUXs9QlWKOzzdY8/edit#gid=0
 
+# Trello Sprint Page
+https://trello.com/b/WHm96AUY/senior-design-machine-learning
+
+# First Presentation
+October 18 2017
+Have Presentation done by October 11 2017 to show Dr. Guizani
+
 # Meeting Times
 w/ Advisor Wednesday 2pm   
 w/ Group Thursday 5pm-8pm
