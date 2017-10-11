@@ -18,6 +18,7 @@ https://trello.com/b/WHm96AUY/senior-design-machine-learning
 
 # First Presentation
 October 18 2017
+https://docs.google.com/presentation/d/1mluXutELvBn_NfMjI1hl6sD70UayW_fbxwLj5GYTk0U/edit?usp=sharing
 Have Presentation done by October 11 2017 to show Dr. Guizani
 
 # Meeting Times
