@@ -1,0 +1,119 @@
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <!--
+	Ideally these elements aren't created until it's confirmed that the 
+	client supports video/camera, but for the sake of illustrating the 
+	elements involved, they are created with markup (not JavaScript)
+	-->
+<script>
+            window.addEventListener("DOMContentLoaded", function() {
+            // Grab elements, create settings, etc.
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+            var mediaConfig =  { video: true };
+            var errBack = function(e) {
+                console.log('An error has occurred!', e)
+            };
+
+            // Put video listeners into place
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+                    video.src = window.URL.createObjectURL(stream);
+                    video.play();
+                });
+            }
+
+            /* Legacy code below! */
+            else if(navigator.getUserMedia) { // Standard
+                navigator.getUserMedia(mediaConfig, function(stream) {
+                    video.src = stream;
+                    video.play();
+                }, errBack);
+            } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+                navigator.webkitGetUserMedia(mediaConfig, function(stream){
+                    video.src = window.webkitURL.createObjectURL(stream);
+                    video.play();
+                }, errBack);
+            } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+                navigator.mozGetUserMedia(mediaConfig, function(stream){
+                    video.src = window.URL.createObjectURL(stream);
+                    video.play();
+                }, errBack);
+            }
+
+            // Trigger photo take
+            document.getElementById('snap').addEventListener('click', function() {
+                context.drawImage(video, 0, 0, 640, 480);
+                putImage();
+                               // convertCanvasToImage(canvas);
+            });
+                       document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
+
+            }, false);
+        
+
+    function convertCanvasToImage(canvas) {
+    var image = new Image();
+    image.src = canvas.toDataURL("img/png");
+    return image;
+    }
+       
+
+</script>
+
+<script>
+function putImage()
+{
+  var canvas1 = document.getElementById("canvas");        
+  if (canvas1.getContext) {
+     var ctx = canvas1.getContext("2d");                
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+  }
+  canvas.download = 'myFilename.jpg'
+  var imageElement = document.getElementById("canvas");  
+  window.location.href=image; // it will save locally
+  imageElement.src = myImage;                           
+}
+
+var assert = require('assert');
+describe('Array', function() {
+  describe('#indexOf()', function() {
+    it('should return -1 when the value is not present', function() {
+      assert.equal(-1, [1,2,3].indexOf(4));
+    });
+  });
+});
+
+  
+</script>
+
+<center>
+<video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
+<canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
+<form method="post" action="/login" autocomplete="on">
+	Username:<input type="text" name="username" id="username"><br>
+	Password:<input type="password" name="password" id="password"><br>
+    <input type="submit" value="Log in">
+<button id="snap1">Log In</button>
+</form>
+<div id="createPNGButton">
+	<button id="snap"> Snap </button>
+    <!-- <button id="downloadLnk" download="face.jpg" onclick="putImage()">Save as Image</button> -->       
+</div>
+</center>
+
+    </body>
+</html>
