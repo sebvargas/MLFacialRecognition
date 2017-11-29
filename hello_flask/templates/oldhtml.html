@@ -13,10 +13,10 @@ and open the template in the editor.
     </head>
     <body>
         <!--
-	Ideally these elements aren't created until it's confirmed that the 
-	client supports video/camera, but for the sake of illustrating the 
-	elements involved, they are created with markup (not JavaScript)
-	-->
+    Ideally these elements aren't created until it's confirmed that the 
+    client supports video/camera, but for the sake of illustrating the 
+    elements involved, they are created with markup (not JavaScript)
+    -->
 <script>
             window.addEventListener("DOMContentLoaded", function() {
             // Grab elements, create settings, etc.
@@ -57,6 +57,7 @@ and open the template in the editor.
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
                 context.drawImage(video, 0, 0, 640, 480);
+                putImage();
                                // convertCanvasToImage(canvas);
             });
                        document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
@@ -74,17 +75,18 @@ and open the template in the editor.
 </script>
 
 <script>
-    function putImage()
+function putImage()
 {
   var canvas1 = document.getElementById("canvas");        
   if (canvas1.getContext) {
      var ctx = canvas1.getContext("2d");                
-var image = canvas.toDataURL("img/png").replace("img/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
   }
+  canvas.download = 'myFilename.jpg'
   var imageElement = document.getElementById("canvas");  
   window.location.href=image; // it will save locally
-  imageElement.src = myImage;                           
-
+  imageElement.src = myImage;
+  //FileStorage(stream=request.files['image']).save(os.path.join(app.config['AUTHOR_FOLDER'],'testpic.jpg')))                           
 }
 
 var assert = require('assert');
@@ -102,14 +104,16 @@ describe('Array', function() {
 <center>
 <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
 <canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
-<form method="post" action="addContact.php" autocomplete="on">
-	Username:<input type="text" name="username" id="username"><br>
-	Password:<input type="password" name="password" id="password"><br>
-<button id="snap1">Log In</button>
+<form method="post" action="/login" autocomplete="on">
+    Username:<input type="text" name="username" id="username" required><br>
+    Password:<input type="password" name="password" id="password" required><br>
+    <input id="snap" type="submit" value="Log in">
+</form>
+<form method="post" action="/back">
+    <input type="submit" value="back">
 </form>
 <div id="createPNGButton">
-	<button id="snap">Snap</button>
-    <button onclick="putImage()">Save as Image</button>        
+    <!-- <button id="downloadLnk" download="face.jpg" onclick="putImage()">Save as Image</button> -->       
 </div>
 </center>
 

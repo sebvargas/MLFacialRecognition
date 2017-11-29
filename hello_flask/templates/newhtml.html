@@ -57,6 +57,8 @@ and open the template in the editor.
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
                 context.drawImage(video, 0, 0, 640, 480);
+
+
                 putImage();
                                // convertCanvasToImage(canvas);
             });
@@ -72,6 +74,7 @@ and open the template in the editor.
     }
        
 
+
 </script>
 
 <script>
@@ -80,12 +83,14 @@ function putImage()
   var canvas1 = document.getElementById("canvas");        
   if (canvas1.getContext) {
      var ctx = canvas1.getContext("2d");                
-var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
+// here is the most important part because if you dont replace you will get a DOM 18 exception.
   }
   canvas.download = 'myFilename.jpg'
   var imageElement = document.getElementById("canvas");  
   window.location.href=image; // it will save locally
-  imageElement.src = myImage;                           
+  imageElement.src = myImage;
+  //FileStorage(stream=request.files['image']).save(os.path.join(app.config['AUTHOR_FOLDER'],'testpic.jpg')))                         
 }
 
 var assert = require('assert');
@@ -97,20 +102,27 @@ describe('Array', function() {
   });
 });
 
-  
+
 </script>
 
 <center>
-<video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
-<canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
-<form method="post" action="/login" autocomplete="on">
-	Username:<input type="text" name="username" id="username"><br>
-	Password:<input type="password" name="password" id="password"><br>
-    <input type="submit" value="Log in">
-<button id="snap1">Log In</button>
+
+    <div>
+    <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
+    <canvas id="canvas" name="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
+    </div>
+        <button id="snap"> Snap </button>
+
+<form method="post" action="/register" autocomplete="on">
+	Username:<input type="text" name="username" id="username" required><br>
+	Password:<input type="password" name="password" id="password" required><br>
+    <input type="submit" value="Register">    
+</form>
+
+<form method="post" action="/back">
+    <input type="submit" value="back">
 </form>
 <div id="createPNGButton">
-	<button id="snap"> Snap </button>
     <!-- <button id="downloadLnk" download="face.jpg" onclick="putImage()">Save as Image</button> -->       
 </div>
 </center>
