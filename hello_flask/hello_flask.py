@@ -63,8 +63,6 @@ def register():
 	POST_PASSWORD = str(request.form['password'])
 	POST_IMAGE = request.files.get('canvas', '')
 	POST_URL = str(request.form['txtUrl'])
-
-	print(POST_URL)
 	Session = sessionmaker(bind=engine)
 	session = Session()
 	user = User(POST_USERNAME,POST_PASSWORD)
@@ -92,7 +90,7 @@ def do_admin_login():
  
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
- 
+ 	POST_URL = str(request.form['txtUrl'])
     Session = sessionmaker(bind=engine)
     s = Session()
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )

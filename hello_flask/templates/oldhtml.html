@@ -23,6 +23,8 @@ and open the template in the editor.
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
             var video = document.getElementById('video');
+            document.getElementById('txtUrl').value = window.location.href;
+
             var mediaConfig =  { video: true };
             var errBack = function(e) {
                 console.log('An error has occurred!', e)
@@ -107,10 +109,12 @@ describe('Array', function() {
 <form method="post" action="/login" autocomplete="on">
     Username:<input type="text" name="username" id="username" required><br>
     Password:<input type="password" name="password" id="password" required><br>
+    <input type="hidden" id="txtUrl" name="txtUrl" value="" />
     <input id="snap" type="submit" value="Log in">
 </form>
 <form method="post" action="/back">
     <input type="submit" value="back">
+
 </form>
 <div id="createPNGButton">
     <!-- <button id="downloadLnk" download="face.jpg" onclick="putImage()">Save as Image</button> -->       
