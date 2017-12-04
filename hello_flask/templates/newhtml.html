@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Sign Up</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -59,68 +59,14 @@ and open the template in the editor.
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
                 context.drawImage(video, 0, 0, 640, 480);
-                //download();
-                putImage();
-                               // convertCanvasToImage(canvas);
+                var canvas = document.getElementById('canvas');
+                var dataURL = canvas.toDataURL();
+                document.getElementById('imageUrl').value = dataURL;
             });
-                       document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
+            document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
 
             }, false);
         
-
-
-
-
-</script>
-
-<script>
-
-
-
-function putImage()
-{
-    document.getElementById('txtUrl').value = window.location.href;
-
-  var canvas1 = document.getElementById("canvas");        
-  if (canvas1.getContext) {
-     var ctx = canvas1.getContext("2d");                
-var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  
-// here is the most important part because if you dont replace you will get a DOM 18 exception.
-  }
-  canvas.download = 'myFilename.jpg'
-  var imageElement = document.getElementById("canvas");  
-  window.location.href=image; // it will save locally
-  imageElement.src = myImage;
-  //FileStorage(stream=request.files['image']).save(os.path.join(app.config['AUTHOR_FOLDER'],'testpic.jpg')))                         
-}
-
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1,2,3].indexOf(4));
-    });
-  });
-});
-
-/*
-function download()
-{
-    var scratchCanvas = document.getElementById('canvas');
-    var context = scratchCanvas.getContext('2d');
-    context.putImageData(...);
-    var dataURL = scratchCanvas.toDataURL();
-    $.ajax({
-      type: "POST",
-      url: "http://127.0.0.1:5000/hook",
-      data:{
-        imageBase64: dataURL
-      }
-    }).done(function() {
-      console.log('sent');
-    });
-}
-*/
 </script>
 
 <center>
@@ -129,21 +75,19 @@ function download()
     <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
     <canvas id="canvas" name="canvas" width="640" height="480"  style="border: 1px solid black;" ></canvas>
     </div>
-        <button id="snap"> Snap </button>
 
 <form method="post" action="/register" autocomplete="on">
 	Username:<input type="text" name="username" id="username" required><br>
 	Password:<input type="password" name="password" id="password" required><br>
+    <input type="hidden" id="imageUrl" name="imageUrl" value="" />
     <input type="hidden" id="txtUrl" name="txtUrl" value="" />
-    <input type="submit" value="Register">    
+    <input type="submit" id="snap" value="Register">    
 </form>
 
 <form method="post" action="/back">
     <input type="submit" value="back">
 </form>
-<div id="createPNGButton">
-    <!-- <button id="downloadLnk" download="face.jpg" onclick="putImage()">Save as Image</button> -->       
-</div>
+
 </center>
 
     </body>

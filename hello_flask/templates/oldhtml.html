@@ -6,7 +6,7 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Log In</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
@@ -59,8 +59,9 @@ and open the template in the editor.
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
                 context.drawImage(video, 0, 0, 640, 480);
-                putImage();
-                               // convertCanvasToImage(canvas);
+                var canvas = document.getElementById('canvas');
+                var dataURL = canvas.toDataURL();
+                document.getElementById('imageUrl').value = dataURL;
             });
                        document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
 
@@ -76,33 +77,6 @@ and open the template in the editor.
 
 </script>
 
-<script>
-function putImage()
-{
-  var canvas1 = document.getElementById("canvas");        
-  if (canvas1.getContext) {
-     var ctx = canvas1.getContext("2d");                
-var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
-  }
-  canvas.download = 'myFilename.jpg'
-  var imageElement = document.getElementById("canvas");  
-  window.location.href=image; // it will save locally
-  imageElement.src = myImage;
-  //FileStorage(stream=request.files['image']).save(os.path.join(app.config['AUTHOR_FOLDER'],'testpic.jpg')))                           
-}
-
-var assert = require('assert');
-describe('Array', function() {
-  describe('#indexOf()', function() {
-    it('should return -1 when the value is not present', function() {
-      assert.equal(-1, [1,2,3].indexOf(4));
-    });
-  });
-});
-
-  
-</script>
-
 <center>
 <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
 <canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
@@ -110,15 +84,12 @@ describe('Array', function() {
     Username:<input type="text" name="username" id="username" required><br>
     Password:<input type="password" name="password" id="password" required><br>
     <input type="hidden" id="txtUrl" name="txtUrl" value="" />
-    <input id="snap" type="submit" value="Log in">
+    <input type="hidden" id="imageUrl" name="imageUrl" value="" />
+    <input id="snap" type="submit" id="snap" value="Log in">
 </form>
 <form method="post" action="/back">
     <input type="submit" value="back">
-
 </form>
-<div id="createPNGButton">
-    <!-- <button id="downloadLnk" download="face.jpg" onclick="putImage()">Save as Image</button> -->       
-</div>
 </center>
 
     </body>

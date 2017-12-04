@@ -6,10 +6,10 @@ from tabledef import *
 engine = create_engine('sqlite:///tutorial.db', echo=True)
 import numpy as np
 from PIL import Image
-import base64
 import re
 import cStringIO
- 
+import io, base64
+
 
 # Create the application.
 APP = Flask(__name__)
@@ -32,7 +32,7 @@ def index():
 
 @APP.route('/newHtml')
 def newHtml():
-    return render_template('newHtml.html')
+    return render_template('newhtml.html')
 
 @APP.route('/')
 def home(POST_USERNAME, POST_PASSWORD):
@@ -61,8 +61,9 @@ def register_confirm(POST_USERNAME, POST_PASSWORD, POST_IMAGE):
 def register():
 	POST_USERNAME = str(request.form['username'])
 	POST_PASSWORD = str(request.form['password'])
-	POST_IMAGE = request.files.get('canvas', '')
+	POST_IMAGE = str(request.form['imageUrl'])
 	POST_URL = str(request.form['txtUrl'])
+	imgURItoFile(POST_IMAGE, "signup")
 	Session = sessionmaker(bind=engine)
 	session = Session()
 	user = User(POST_USERNAME,POST_PASSWORD)
@@ -90,7 +91,9 @@ def do_admin_login():
  
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
- 	POST_URL = str(request.form['txtUrl'])
+    POST_IMAGE = str(request.form['imageUrl'])
+    POST_URL = str(request.form['txtUrl'])
+    imgURItoFile(POST_IMAGE, "login")
     Session = sessionmaker(bind=engine)
     s = Session()
     query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
@@ -103,13 +106,20 @@ def do_admin_login():
 
 @APP.route('/oldHtml')
 def oldHtml():
-    return render_template('oldHtml.html')
+    return render_template('oldhtml.html')
 
 @APP.route('/back', methods=['POST'])
 def back():
     return render_template('index.html')
 
-
+def imgURItoFile(data, state):
+	if state == "login":
+		fileName = "loginPic.png"
+	else:
+		fileName = "signinPic.png"
+	fh = open(fileName, "wb")
+	fh.write(str(data.split(",")[1].decode('base64')))
+	fh.close()
 
 if __name__ == '__main__':
 	APP.secret_key = os.urandom(12)
