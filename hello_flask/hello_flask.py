@@ -116,7 +116,7 @@ def imgURItoFile(data, state):
 	if state == "login":
 		fileName = "loginPic.png"
 	else:
-		fileName = "signinPic.png"
+		fileName = "signupPic.png"
 	fh = open(fileName, "wb")
 	fh.write(str(data.split(",")[1].decode('base64')))
 	fh.close()
