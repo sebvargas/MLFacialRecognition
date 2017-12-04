@@ -23,6 +23,8 @@ and open the template in the editor.
             var canvas = document.getElementById('canvas');
             var context = canvas.getContext('2d');
             var video = document.getElementById('video');
+            document.getElementById('txtUrl').value = window.location.href;
+
             var mediaConfig =  { video: true };
             var errBack = function(e) {
                 console.log('An error has occurred!', e)
@@ -57,8 +59,7 @@ and open the template in the editor.
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
                 context.drawImage(video, 0, 0, 640, 480);
-
-
+                //download();
                 putImage();
                                // convertCanvasToImage(canvas);
             });
@@ -67,19 +68,19 @@ and open the template in the editor.
             }, false);
         
 
-    function convertCanvasToImage(canvas) {
-    var image = new Image();
-    image.src = canvas.toDataURL("img/png");
-    return image;
-    }
-       
+
 
 
 </script>
 
 <script>
+
+
+
 function putImage()
 {
+    document.getElementById('txtUrl').value = window.location.href;
+
   var canvas1 = document.getElementById("canvas");        
   if (canvas1.getContext) {
      var ctx = canvas1.getContext("2d");                
@@ -102,20 +103,38 @@ describe('Array', function() {
   });
 });
 
-
+/*
+function download()
+{
+    var scratchCanvas = document.getElementById('canvas');
+    var context = scratchCanvas.getContext('2d');
+    context.putImageData(...);
+    var dataURL = scratchCanvas.toDataURL();
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:5000/hook",
+      data:{
+        imageBase64: dataURL
+      }
+    }).done(function() {
+      console.log('sent');
+    });
+}
+*/
 </script>
 
 <center>
 
     <div>
     <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
-    <canvas id="canvas" name="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
+    <canvas id="canvas" name="canvas" width="640" height="480"  style="border: 1px solid black;" ></canvas>
     </div>
         <button id="snap"> Snap </button>
 
 <form method="post" action="/register" autocomplete="on">
 	Username:<input type="text" name="username" id="username" required><br>
 	Password:<input type="password" name="password" id="password" required><br>
+    <input type="hidden" id="txtUrl" name="txtUrl" value="" />
     <input type="submit" value="Register">    
 </form>
 

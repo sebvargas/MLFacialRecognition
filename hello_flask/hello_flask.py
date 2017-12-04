@@ -15,6 +15,15 @@ import cStringIO
 APP = Flask(__name__)
 APP.config
 
+@APP.route('/hook', methods=['POST'])
+def get_image():
+    image_b64 = request.values['imageBase64']
+    image_data = re.sub('^data:image/.+;base64,', '', image_b64).decode('base64')
+    image_PIL = Image.open(cStringIO.StringIO(image_b64))
+    image_np = np.array(image_PIL)
+    print 'Image received: {}'.format(image_np.shape)
+    return ''
+
 @APP.route('/index')
 def index():
     """ Displays the index page accessible at '/'
@@ -53,7 +62,9 @@ def register():
 	POST_USERNAME = str(request.form['username'])
 	POST_PASSWORD = str(request.form['password'])
 	POST_IMAGE = request.files.get('canvas', '')
-	print(POST_IMAGE)
+	POST_URL = str(request.form['txtUrl'])
+
+	print(POST_URL)
 	Session = sessionmaker(bind=engine)
 	session = Session()
 	user = User(POST_USERNAME,POST_PASSWORD)
