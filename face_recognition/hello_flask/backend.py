@@ -11,10 +11,6 @@ import io, base64
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import register_new, classify
-import bcrypt
-
-#database file name
-engine = create_engine('sqlite:///tutorial.db', echo=True)
 
 def register(POST_USERNAME, POST_IMAGE, POST_URL):
 
