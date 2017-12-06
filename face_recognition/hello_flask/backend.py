@@ -16,39 +16,16 @@ import bcrypt
 #database file name
 engine = create_engine('sqlite:///tutorial.db', echo=True)
 
-def register(POST_USERNAME, POST_PASSWORD, POST_IMAGE, POST_URL):
+def register(POST_USERNAME, POST_IMAGE, POST_URL):
 
     imgURItoFile(POST_IMAGE, "signup")
-    password_hashed = bcrypt.hashpw(POST_PASSWORD, bcrypt.gensalt())
     register_new(POST_USERNAME)
     imgURItoFile(POST_IMAGE, "signup")
-
-    """
-	Session = sessionmaker(bind=engine)
-	session = Session()
-	user = User(POST_USERNAME,password_hashed)
-	session.add(user)
-	# commit the record the database
-	session.commit() 
-	session.commit()
-	s = Session()
-	query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]))
-	result = query.first()
-    
-    result = classify(POST_URL)
-
-	if result:
-		print("Registration Successful!")
-	else:
-		flash('Failed Registration')
-    """ 
 
 #returns username
 def login(POST_IMAGE):
  
     imgURItoFile(POST_IMAGE, "login")
-
-
     result = classify()   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
     os.remove("unknown")  #cleanup
 
