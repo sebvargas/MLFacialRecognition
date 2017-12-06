@@ -10,7 +10,6 @@ import re
 import cStringIO
 import io, base64
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import register_new, classify
 import backend
 
@@ -57,15 +56,13 @@ def log_in(POST_USERNAME):
 def register_confirm(POST_USERNAME, POST_IMAGE):
 	session['logged_in'] = False
 
-	return "You have registered! " +  POST_USERNAME  + "  <a href='/index'>Logout</a>"
+	return "You have registered! " +  POST_USERNAME  + "  <a href='/index'>Home</a>"
 
 @APP.route('/register',  methods=['POST'])
 def register():
     POST_USERNAME = str(request.form['username'])
     POST_IMAGE = str(request.form['imageUrl'])
-    POST_URL = str(request.form['txtUrl'])
-    POST_URL = POST_URL.split('/')[-1]
-    backend.register(POST_USERNAME, POST_IMAGE, POST_URL)
+    backend.register(POST_USERNAME, POST_IMAGE)
     return register_confirm(POST_USERNAME, POST_IMAGE)
 
 @APP.route('/login', methods=['POST'])

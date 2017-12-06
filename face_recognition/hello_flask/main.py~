@@ -1,9 +1,8 @@
 import face_recognition
-from credential_manager import set_pass, get_pass
 import shutil
 import os
 
-KNOWN_IMAGE_DIR = "../known_images/"  #todo, make this absolute path
+KNOWN_IMAGE_DIR = "known_images/"  #todo, make this absolute path
 
 def register_new(username):
     print "DEBUG: register_new. username=",username
@@ -14,6 +13,10 @@ def classify():
     print "DEBUG: classify"
     #load in to-be-classified image
     unknown_image = face_recognition.load_image_file("unknown")
+    
+    if len(unknown_image) == 0:  #error loading image
+        print "DEBUG: error loading image"
+        return None
 
 
     # Load the jpg files into numpy arrays

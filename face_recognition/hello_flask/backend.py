@@ -12,16 +12,16 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import register_new, classify
 
-def register(POST_USERNAME, POST_IMAGE, POST_URL):
+def register(username, image_URI):
 
-    imgURItoFile(POST_IMAGE, "signup")
-    register_new(POST_USERNAME)
-    imgURItoFile(POST_IMAGE, "signup")
+    imgURItoFile(image_URI, "signup")
+    register_new(username)
+
 
 #returns username
-def login(POST_IMAGE):
+def login(image_URI):
  
-    imgURItoFile(POST_IMAGE, "login")
+    imgURItoFile(image_URI, "login")
     result = classify()   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
     os.remove("unknown")  #cleanup
 
