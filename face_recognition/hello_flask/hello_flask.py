@@ -3,7 +3,7 @@ from flask import Flask, flash, redirect, render_template, request, session, abo
 import os
 from sqlalchemy.orm import sessionmaker
 from tabledef import *
-engine = create_engine('sqlite:///tutorial.db', echo=True)
+#engine = create_engine('sqlite:///tutorial.db', echo=True)
 import numpy as np
 from PIL import Image
 import re
@@ -12,6 +12,7 @@ import io, base64
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from main import register_new, classify
+import backend
 
 # Create the application.
 APP = Flask(__name__)
@@ -45,21 +46,18 @@ def home(POST_USERNAME, POST_PASSWORD):
         return "Hello " +  POST_USERNAME + " " + POST_PASSWORD + "  <a href='/index'>Logout</a>" 
 
 @APP.route('/log_in')
-def log_in():
-    if not session.get('logged_in'):
+def log_in(POST_USERNAME):
+    if POST_USERNAME == None:
     	return "log in failed. Click New User <a href='/index'>Back</a>"
     else:
     	session['logged_in'] = False
-        POST_USERNAME = "PLACE HOLDER"
-        POST_PASSWORD = "PLACE HOLDER"
-        return "Hello " +  POST_USERNAME + " " + POST_PASSWORD + "  <a href='/index'>Logout</a>" 
+        return "Hello " +  POST_USERNAME  + "  <a href='/index'>Logout</a>" 
 
 @APP.route('/register_confirm')
 def register_confirm(POST_USERNAME, POST_PASSWORD, POST_IMAGE):
-	print(str(POST_IMAGE))
 	session['logged_in'] = False
 
-	return "Hello " +  POST_USERNAME + " " + POST_PASSWORD + "  <a href='/index'>Logout</a>"
+	return "You have registered! " +  POST_USERNAME + " " + POST_PASSWORD + "  <a href='/index'>Logout</a>"
 
 @APP.route('/register',  methods=['POST'])
 def register():
@@ -68,8 +66,9 @@ def register():
     POST_IMAGE = str(request.form['imageUrl'])
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
-    imgURItoFile(POST_IMAGE, "signup")
-    register_new(POST_URL,POST_USERNAME,POST_PASSWORD)
+    backend.register(POST_USERNAME, POST_PASSWORD, POST_IMAGE, POST_URL)
+    #backend.imgURItoFile(POST_IMAGE, "signup")
+
 
     '''
 	Session = sessionmaker(bind=engine)
@@ -101,25 +100,14 @@ def do_admin_login():
     POST_IMAGE = str(request.form['imageUrl'])
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
-    imgURItoFile(POST_IMAGE, "login")
-
-    '''
-    Session = sessionmaker(bind=engine)
-    s = Session()
-    query = s.query(User).filter(User.username.in_([POST_USERNAME]), User.password.in_([POST_PASSWORD]) )
-    result = query.first()
-    '''
-
-    result = classify(POST_URL)
-    os.remove("loginPic.png")  #cleanup
-    print result
-    if result != False:
-        print "CLASSIFIED SUCCESSFULLY", result[0], result[1]
+    backend.imgURItoFile(POST_IMAGE, "login")
+    result = backend.login(POST_IMAGE)
+    if result != None:
+        print "CLASSIFIED SUCCESSFULLY", result
         session['logged_in'] = True
     else:
         print "CLASSIFICATION FAILED"
-        print('wrong password!')
-    return log_in()
+    return log_in(result)
 
 @APP.route('/oldHtml')
 def oldHtml():
