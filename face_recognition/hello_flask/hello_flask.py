@@ -45,11 +45,13 @@ def home(POST_USERNAME, POST_PASSWORD):
         return "Hello " +  POST_USERNAME + " " + POST_PASSWORD + "  <a href='/index'>Logout</a>" 
 
 @APP.route('/log_in')
-def log_in(POST_USERNAME, POST_PASSWORD):
+def log_in():
     if not session.get('logged_in'):
     	return "log in failed. Click New User <a href='/index'>Back</a>"
     else:
     	session['logged_in'] = False
+        POST_USERNAME = "PLACE HOLDER"
+        POST_PASSWORD = "PLACE HOLDER"
         return "Hello " +  POST_USERNAME + " " + POST_PASSWORD + "  <a href='/index'>Logout</a>" 
 
 @APP.route('/register_confirm')
@@ -64,8 +66,11 @@ def register():
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
     POST_IMAGE = str(request.form['imageUrl'])
+    POST_URL = str(request.form['txtUrl'])
+    POST_URL = POST_URL.split('/')[-1]
     imgURItoFile(POST_IMAGE, "signup")
-    register_new(POST_USERNAME,POST_PASSWORD)
+    register_new(POST_URL,POST_USERNAME,POST_PASSWORD)
+
     '''
 	Session = sessionmaker(bind=engine)
 	session = Session()
@@ -93,8 +98,6 @@ def register():
 @APP.route('/login', methods=['POST'])
 def do_admin_login():
  
-    POST_USERNAME = str(request.form['username'])
-    POST_PASSWORD = str(request.form['password'])
     POST_IMAGE = str(request.form['imageUrl'])
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
@@ -116,7 +119,7 @@ def do_admin_login():
     else:
         print "CLASSIFICATION FAILED"
         print('wrong password!')
-    return log_in(POST_USERNAME, POST_PASSWORD)
+    return log_in()
 
 @APP.route('/oldHtml')
 def oldHtml():
