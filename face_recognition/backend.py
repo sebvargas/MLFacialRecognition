@@ -28,7 +28,7 @@ def get_image():
 
 def register(POST_USERNAME, POST_PASSWORD, POST_IMAGE):
 
-	imgURItoFile(POST_IMAGE, "signup")
+    imgURItoFile(POST_IMAGE, "signup")
 
     password_hashed = bcrypt.hashpw(POST_PASSWORD, bcrypt.gensalt())
     register_new(POST_URL,POST_USERNAME,password_hashed)
@@ -68,8 +68,8 @@ def do_admin_login(POST_IMAGE):
     result = query.first()
     
 
-    result = classify(POST_URL)
-    os.remove("loginPic.png")  #cleanup
+    result = classify()   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
+    os.remove("unknown")  #cleanup
 
     return log_in(POST_USERNAME, POST_PASSWORD)
 
