@@ -17,10 +17,6 @@ import bcrypt
 engine = create_engine('sqlite:///tutorial.db', echo=True)
 
 
-# Create the application.
-APP = Flask(__name__)
-APP.config
-
 @APP.route('/hook', methods=['POST'])
 def get_image():
     image_b64 = request.values['imageBase64']
@@ -30,18 +26,12 @@ def get_image():
     print 'Image received: {}'.format(image_np.shape)
     return ''
 
-@APP.route('/register',  methods=['POST'])
-def register():
-	POST_USERNAME = str(request.form['username'])
-	POST_PASSWORD = str(request.form['password'])
-	POST_IMAGE = str(request.form['imageUrl'])
-	POST_URL = str(request.form['txtUrl'])
-    POST_URL = POST_URL.split('/')[-1]
+def register(POST_USERNAME, POST_PASSWORD, POST_IMAGE):
+
 	imgURItoFile(POST_IMAGE, "signup")
 
     password_hashed = bcrypt.hashpw(POST_PASSWORD, bcrypt.gensalt())
     register_new(POST_URL,POST_USERNAME,password_hashed)
-
 
 	Session = sessionmaker(bind=engine)
 	session = Session()
@@ -62,8 +52,7 @@ def register():
 	return register_confirm(POST_USERNAME, POST_PASSWORD, POST_IMAGE)
 
 
-@APP.route('/login', methods=['POST'])
-def do_admin_login():
+def do_admin_login(POST_IMAGE):
  
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
@@ -81,13 +70,7 @@ def do_admin_login():
 
     result = classify(POST_URL)
     os.remove("loginPic.png")  #cleanup
-    print result
-    if result != False:
-        print "CLASSIFIED SUCCESSFULLY", result[0], result[1]
-        session['logged_in'] = True
-    else:
-        print "CLASSIFICATION FAILED"
-        print('wrong password!')
+
     return log_in(POST_USERNAME, POST_PASSWORD)
 
 @APP.route('/oldHtml')

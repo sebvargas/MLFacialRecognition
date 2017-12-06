@@ -64,10 +64,8 @@ def register():
     POST_USERNAME = str(request.form['username'])
     POST_PASSWORD = str(request.form['password'])
     POST_IMAGE = str(request.form['imageUrl'])
-    POST_URL = str(request.form['txtUrl'])
-    POST_URL = POST_URL.split('/')[-1]
     imgURItoFile(POST_IMAGE, "signup")
-    register_new(POST_URL,POST_USERNAME,POST_PASSWORD)
+    register_new(POST_USERNAME,POST_PASSWORD)
     '''
 	Session = sessionmaker(bind=engine)
 	session = Session()
