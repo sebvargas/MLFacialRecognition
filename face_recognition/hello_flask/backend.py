@@ -14,14 +14,17 @@ from main import register_new, classify
 
 def register(username, image_URI):
 
-    imgURItoFile(image_URI, "signup")
-    register_new(username)
+    if imgURItoFile(image_URI, "signup"):
+        register_new(username)
+        return True
+    return False
 
 
 #returns username
 def login(image_URI):
- 
-    imgURItoFile(image_URI, "login")
+
+    if not imgURItoFile(image_URI, "login"):
+        return None
     result = classify()   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
     os.remove("unknown")  #cleanup
 
@@ -33,6 +36,10 @@ def imgURItoFile(data, state):
 	else:
 		fileName = "signupPic.png"
 	fh = open(fileName, "wb")
-	fh.write(str(data.split(",")[1].decode('base64')))
+        try:
+	    fh.write(str(data.split(",")[1].decode('base64')))
+        except:
+            return False
 	fh.close()
+        return True
 

@@ -58,19 +58,28 @@ def register_confirm(POST_USERNAME, POST_IMAGE):
 
 	return "You have registered! " +  POST_USERNAME  + "  <a href='/index'>Home</a>"
 
+@APP.route('/register_failed')
+def register_failed():
+	session['logged_in'] = False
+
+	return "Registration Failed!  <a href='/index'>Home</a>"
+
 @APP.route('/register',  methods=['POST'])
 def register():
     POST_USERNAME = str(request.form['username'])
     POST_IMAGE = str(request.form['imageUrl'])
-    backend.register(POST_USERNAME, POST_IMAGE)
-    return register_confirm(POST_USERNAME, POST_IMAGE)
+    if backend.register(POST_USERNAME, POST_IMAGE):
+        return register_confirm(POST_USERNAME, POST_IMAGE)
+    else:
+        return register_failed()
 
 @APP.route('/login', methods=['POST'])
 def do_admin_login():
     POST_IMAGE = str(request.form['imageUrl'])
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
-    backend.imgURItoFile(POST_IMAGE, "login")
+    if not backend.imgURItoFile(POST_IMAGE, "login"):
+        return log_in(None)
     result = backend.login(POST_IMAGE)
     if result != None:
         print "CLASSIFIED SUCCESSFULLY", result
@@ -87,14 +96,6 @@ def oldHtml():
 def back():
     return render_template('index.html')
 
-def imgURItoFile(data, state):
-	if state == "login":
-		fileName = "loginPic.png"
-	else:
-		fileName = "signupPic.png"
-	fh = open(fileName, "wb")
-	fh.write(str(data.split(",")[1].decode('base64')))
-	fh.close()
 
 if __name__ == '__main__':
 	APP.secret_key = os.urandom(12)

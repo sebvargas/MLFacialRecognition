@@ -8,9 +8,9 @@ def register_new(username):
     print "DEBUG: register_new. username=",username
     shutil.move("signupPic.png",KNOWN_IMAGE_DIR + username)  #todo, check if image is already there
 
-    
+
 def classify():
-    print "DEBUG: classify"
+
     #load in to-be-classified image
     unknown_image = face_recognition.load_image_file("unknown")
     
