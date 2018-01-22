@@ -37,9 +37,9 @@ def imgURItoFile(data, state):
 		fileName = "signupPic.png"
 	fh = open(fileName, "wb")
         try:
-	    fh.write(str(data.split(",")[1].decode('base64')))
+	    	fh.write(str(data.split(",")[1].decode('base64')))
         except:
             return False
 	fh.close()
-        return True
+	return True
 
