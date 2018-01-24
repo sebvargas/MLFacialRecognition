@@ -27,4 +27,4 @@ https://docs.google.com/document/d/1T0qqI2U3xcnHPpaKTUZ6z49pPS1e8bm-bF3wBU6qyyM/
 
 # Meeting Times
 w/ Advisor Wednesday 2:30 pm   
-w/ Group Thursday 5pm-8pm
+w/ Group Sunday 8pm-10pm, Friday 2pm-5pm
