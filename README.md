@@ -1,6 +1,12 @@
 # MLFacialRecognition
 Machine Learning on Facial Recognition
 
+# Important dates
+Wed 2/28 Project Status Presentation
+Wed 4/25 Final Proj. Rep
+Wed 5/2  Design Exp Proj Pres
+Wed 5/9 Final Deliverable (20% grade) 
+
 # CPSC Checklist
 https://docs.google.com/spreadsheets/d/1xzCPyRoO7XPjTXlf7PU7pdMy1TYnAnTil5oFXNg6wr4/edit#gid=0
 
@@ -28,3 +34,4 @@ https://docs.google.com/document/d/1T0qqI2U3xcnHPpaKTUZ6z49pPS1e8bm-bF3wBU6qyyM/
 # Meeting Times
 w/ Advisor Wednesday 2:30 pm   
 w/ Group Sunday 8pm-10pm, Friday 2pm-5pm
+
