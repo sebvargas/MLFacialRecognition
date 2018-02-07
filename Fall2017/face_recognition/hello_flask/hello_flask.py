@@ -69,7 +69,7 @@ def register():
     POST_IMAGE = str(request.form['imageUrl'])
     IMAGES = POST_IMAGE.split("#*^/")
     print "In register. Images len: " + str(len(IMAGES))
-    print IMAGES
+    print len(IMAGES)
     if backend.register(POST_USERNAME, IMAGES):
         return register_confirm(POST_USERNAME, POST_IMAGE)
     else:

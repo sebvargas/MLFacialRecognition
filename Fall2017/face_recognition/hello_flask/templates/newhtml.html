@@ -58,9 +58,8 @@ and open the template in the editor.
 
 
             var count = 0;
-            var num_of_images = 2;
+            var num_of_images = 5;
             var images = "";
-            alert(images);
 
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
@@ -85,7 +84,6 @@ and open the template in the editor.
                 var canvas = document.getElementById('canvas');
  	        var dataURL = canvas.toDataURL();
 			  images = images + dataURL;
-			  alert(images);
                 document.getElementById('imageUrl').value = images;
             }
                        document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
