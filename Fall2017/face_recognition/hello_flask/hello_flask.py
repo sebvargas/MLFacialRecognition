@@ -10,7 +10,6 @@ import re
 import cStringIO
 import io, base64
 import sys
-from main import register_new, classify
 import backend
 
 # Create the application.
@@ -68,12 +67,11 @@ def register_failed():
 def register():
     POST_USERNAME = str(request.form['username'])
     POST_IMAGE = str(request.form['imageUrl'])
-    POST_IMAGE2 = str(request.form['imageUrl2'])
-
-    if backend.register(POST_USERNAME, POST_IMAGE):
-        print(register_confirm(POST_USERNAME, POST_IMAGE))
-        print(register_confirm("SecondPic", POST_IMAGE2))
-        return (register_confirm(POST_USERNAME, POST_IMAGE) and register_confirm("SecondPic", POST_IMAGE2))
+    IMAGES = POST_IMAGE.split("#*^/")
+    print "In register. Images len: " + str(len(IMAGES))
+    print IMAGES
+    if backend.register(POST_USERNAME, IMAGES):
+        return register_confirm(POST_USERNAME, POST_IMAGE)
     else:
         return register_failed()
 

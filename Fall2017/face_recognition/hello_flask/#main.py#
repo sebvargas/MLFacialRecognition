@@ -1,5 +1,9 @@
 import face_recognition
+import shutil
 import os
+
+KNOWN_IMAGE_DIR = "known_images/"  #todo, make this absolute path
+
 
 def classify():
 
