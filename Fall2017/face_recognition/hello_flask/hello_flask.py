@@ -68,8 +68,12 @@ def register_failed():
 def register():
     POST_USERNAME = str(request.form['username'])
     POST_IMAGE = str(request.form['imageUrl'])
+    POST_IMAGE2 = str(request.form['imageUrl2'])
+
     if backend.register(POST_USERNAME, POST_IMAGE):
-        return register_confirm(POST_USERNAME, POST_IMAGE)
+        print(register_confirm(POST_USERNAME, POST_IMAGE))
+        print(register_confirm("SecondPic", POST_IMAGE2))
+        return (register_confirm(POST_USERNAME, POST_IMAGE) and register_confirm("SecondPic", POST_IMAGE2))
     else:
         return register_failed()
 

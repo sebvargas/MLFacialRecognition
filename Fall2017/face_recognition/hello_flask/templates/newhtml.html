@@ -56,13 +56,37 @@ and open the template in the editor.
                 }, errBack);
             }
 
+
+            var count = 0;
+            var num_of_images = 2;
+
+
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
+
+
                 context.drawImage(video, 0, 0, 640, 480);
                 var canvas = document.getElementById('canvas');
                 var dataURL = canvas.toDataURL();
                 document.getElementById('imageUrl').value = dataURL;
+
+
+                setTimeout(wait(), 3000);   
+
+
+
+
+
+
             });
+
+            function wait() {
+                alert("second");
+                context.drawImage(video, 0, 0, 640, 480);
+                var canvas = document.getElementById('canvas');
+                var dataURL = canvas.toDataURL();
+                document.getElementById('imageUrl2').value = dataURL;
+            }
                        document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
 
             }, false);
@@ -77,6 +101,7 @@ and open the template in the editor.
     Username:<input type="text" name="username" id="username" required><br>
     <input type="hidden" id="txtUrl" name="txtUrl" value="" />
     <input type="hidden" id="imageUrl" name="imageUrl" value="" />
+    <input type="hidden" id="imageUrl2" name="imageUrl2" value="" />
     <input id="snap" type="submit" id="snap" value="Log in">
 </form>
 <form method="post" action="/back">
