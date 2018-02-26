@@ -21,8 +21,10 @@ def classify(KNOWN_IMAGE_DIR):
     
 
     for user in registered_users:
+        print 'checking user', user
         known_images = []
         curr_dir_pics = [p for p in os.listdir(KNOWN_IMAGE_DIR + user) if not p.startswith('.')]
+
         for pic in curr_dir_pics:
             known_images.append(face_recognition.load_image_file(KNOWN_IMAGE_DIR + user + "/" + pic))
 
@@ -30,11 +32,15 @@ def classify(KNOWN_IMAGE_DIR):
         # Since there could be more than one face in each image, it returns a list of encodings.
         # But since I know each image only has one face, I only care about the first encoding in each image, so grab index 0.
         known_faces = []
+        i = 0
         for known_image in known_images:
-            known_faces.append(face_recognition.face_encodings(known_image)[0])
-
-
-
+            encoding = face_recognition.face_encodings(known_image)
+            if len(encoding) == 1:
+                known_faces.append(encoding[0])
+                print 'good', i
+            else:
+                print 'IGNORING IMAGE, 0 or >2 FACES FOUND', i, 'len:', len(encoding)
+            i += 1
         distances = face_recognition.face_distance(known_faces, unknown_face_encoding)
 
         print distances, 'min:', min(distances)
