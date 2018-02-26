@@ -1,9 +1,6 @@
 from flask import Flask
 from flask import Flask, flash, redirect, render_template, request, session, abort
 import os
-from sqlalchemy.orm import sessionmaker
-from tabledef import *
-#engine = create_engine('sqlite:///tutorial.db', echo=True)
 import numpy as np
 from PIL import Image
 import re
@@ -80,14 +77,14 @@ def do_admin_login():
     POST_IMAGE = str(request.form['imageUrl'])
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
-    if not backend.imgURItoFile(POST_IMAGE, "login"):
-        return log_in(None)
+
     result = backend.login(POST_IMAGE)
     if result != None:
         print "CLASSIFIED SUCCESSFULLY", result
         session['logged_in'] = True
     else:
         print "CLASSIFICATION FAILED"
+        return log_in(None)
     return log_in(result)
 
 @APP.route('/oldHtml')
