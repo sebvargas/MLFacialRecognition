@@ -3,18 +3,40 @@ from person_recognition.person_classifier import classify_person
 import os
 from operator import itemgetter
 
-def is_person():
-    results = classify_person("person_recognition/tmp/output_graph.pb","person_recognition/tmp/output_labels.txt","final_result",128,128,"unknown") #todo, 128x128 size may not always be true
+def is_person(img_fp):
+    results = classify_person("person_recognition/tmp/output_graph.pb","person_recognition/tmp/output_labels.txt","Mul","final_result",128,128,img_fp) #todo, 128x128 size may not always be true
 
     result = max(results, key=itemgetter(1))
     return (result[0] == 'people') and (result[1] >= .95)
 
 
+def safety_check():
+
+    #check if profiles are of heads
+    if not is_person("unknown_left") or not is_person("unknown_right"):
+        print "PROFILES ARE NOT PEOPLE, ERR"
+        return False
+
+    #check if profiles are not faces
+    left_image = face_recognition.load_image_file("unknown_left")
+    right_image = face_recognition.load_image_file("unknown_right")
+
+    left_encoding = face_recognition.face_encodings(left_image)
+    right_encoding = face_recognition.face_encodings(right_image)
+    if len(left_encoding) != 0 or len(right_encoding) != 0:
+        print "ERR, FACE FOUND"
+        return False
+    
+    return True
+    
 def classify(KNOWN_IMAGE_DIR, confidence):
 
-    #load in to-be-classified image
-    unknown_image = face_recognition.load_image_file("unknown")
+    if not safety_check():
+        print "SAFETY CHECK FAILED"
+        return None
     
+    #load in to-be-classified image
+    unknown_image = face_recognition.load_image_file("unknown")  
 
     # Load the jpg files into numpy arrays
     registered_users = [f for f in os.listdir(KNOWN_IMAGE_DIR) if not f.startswith('.')]
@@ -25,7 +47,6 @@ def classify(KNOWN_IMAGE_DIR, confidence):
         return None
         
     unknown_face_encoding = unknown_encoding[0]
-
 
     result = None
     for user in registered_users:

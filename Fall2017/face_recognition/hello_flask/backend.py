@@ -27,12 +27,16 @@ def register(username, image_URIs):
 
 #returns username
 def login(image_URIs,confidence):
+    print 'here'
     for i in range(len(image_URIs)):
-        if not i == 0 && imgURItoFile("unknown", image_URIs[i]):
+        if i == 0 and not imgURItoFile("unknown", image_URIs[i]):
+            print 'i=1 failed'
             return None
-        if not i == 1 && imgURItoFile("unknown_left", image_URIs[i]):
+        if i == 1 and not imgURItoFile("unknown_left", image_URIs[i]):
+            print 'i=2 failed'
             return None
-        if not i == 2 && imgURItoFile("unknown_right", image_URIs[i]):
+        if i == 2 and not imgURItoFile("unknown_right", image_URIs[i]):
+            print 'i=3 failed'
             return None
 
         

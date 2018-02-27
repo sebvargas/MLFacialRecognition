@@ -9,6 +9,10 @@ import io, base64
 import sys
 import backend
 
+LOW_SECURITY = .6
+MEDIUM_SECURITY = .5
+HIGH_SECURITY = .4
+
 # Create the application.
 APP = Flask(__name__)
 APP.config
@@ -81,7 +85,7 @@ def do_admin_login():
     IMAGES = POST_IMAGE.split("#*^/")
     print "In register. Images len: " + str(len(IMAGES))
     
-    result = backend.login(POST_IMAGE,.5)
+    result = backend.login(IMAGES,MEDIUM_SECURITY)
     if result != None:
         print "CLASSIFIED SUCCESSFULLY", result
         session['logged_in'] = True
