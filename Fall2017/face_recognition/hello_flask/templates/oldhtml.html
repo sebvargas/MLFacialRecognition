@@ -56,17 +56,44 @@ and open the template in the editor.
                 }, errBack);
             }
 
+            var count = 0;
+            var num_of_images = 3;
+            var images = "";
+
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
+                //setTimeout(snapMe(1), 5000);
+                alert("Look forward then snap");
+
                 context.drawImage(video, 0, 0, 640, 480);
                 var canvas = document.getElementById('canvas');
                 var dataURL = canvas.toDataURL();
-                document.getElementById('imageUrl').value = dataURL;
+                images = images + dataURL;
+                document.getElementById('imageUrl').value = images;
+
+            for (i=1; i < num_of_images; i++) {
+                  images = images + "#*^/";
+                  setTimeout(snapMe(i), 50000);
+              }
+
             });
-                       document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
+
+            function snapMe(i) {
+                if(i == 1) {
+                    alert("Look to the right then snap");
+                }
+                else {
+                    alert("Look to the left then snap");
+                }
+                context.drawImage(video, 0, 0, 640, 480);
+                var canvas = document.getElementById('canvas');
+                var dataURL = canvas.toDataURL();
+                images = images + dataURL;
+                document.getElementById('imageUrl').value = images;
+            }
+            document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
 
             }, false);
-        
        
 
 </script>
