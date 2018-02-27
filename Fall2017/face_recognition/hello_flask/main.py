@@ -1,8 +1,16 @@
 import face_recognition
+from person_recognition.person_classifier import classify_person
 import os
+from operator import itemgetter
+
+def is_person():
+    results = classify_person("person_recognition/tmp/output_graph.pb","person_recognition/tmp/output_labels.txt","final_result",128,128,"unknown") #todo, 128x128 size may not always be true
+
+    result = max(results, key=itemgetter(1))
+    return (result[0] == 'people') and (result[1] >= .95)
 
 
-def classify(KNOWN_IMAGE_DIR):
+def classify(KNOWN_IMAGE_DIR, confidence):
 
     #load in to-be-classified image
     unknown_image = face_recognition.load_image_file("unknown")
@@ -10,7 +18,6 @@ def classify(KNOWN_IMAGE_DIR):
 
     # Load the jpg files into numpy arrays
     registered_users = [f for f in os.listdir(KNOWN_IMAGE_DIR) if not f.startswith('.')]
-    #registered_users = os.listdir(KNOWN_IMAGE_DIR)
 
     unknown_encoding = face_recognition.face_encodings(unknown_image)
     if len(unknown_encoding) == 0:
@@ -18,8 +25,9 @@ def classify(KNOWN_IMAGE_DIR):
         return None
         
     unknown_face_encoding = unknown_encoding[0]
-    
 
+
+    result = None
     for user in registered_users:
         print 'checking user', user
         known_images = []
@@ -45,9 +53,10 @@ def classify(KNOWN_IMAGE_DIR):
 
         print distances, 'min:', min(distances)
 
-        if min(distances) < .5:
+        if min(distances) < confidence:
             print "FOUND USER:", user
             result = user
+            print "result: ", result
         else:
             print "NOT ACCEPTED:", user
 

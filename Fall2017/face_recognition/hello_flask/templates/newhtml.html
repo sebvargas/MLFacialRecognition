@@ -58,44 +58,35 @@ and open the template in the editor.
 
 
             var count = 0;
-            var num_of_images = 3;
+            var num_of_images = 5;
             var images = "";
-
-
 
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {
-                //setTimeout(snapMe(1), 5000);
-                alert("Look forward then snap");
+
 
                 context.drawImage(video, 0, 0, 640, 480);
                 var canvas = document.getElementById('canvas');
                 var dataURL = canvas.toDataURL();
-	            images = images + dataURL;
+	        images = images + dataURL;
                 document.getElementById('imageUrl').value = images;
 
-   	        for (i=1; i < num_of_images; i++) {
+   	    for (i=1; i < num_of_images; i++) {
 			      images = images + "#*^/";
-			      setTimeout(snapMe(i), 50000);
-		      }
+			      setTimeout(wait(i), 3000);
+		}
 
             });
 
-            function snapMe(i) {
-                if(i == 1) {
-                    alert("Look to the right then snap");
-                }
-                else {
-                    alert("Look to the left then snap");
-                }
+            function wait(i) {
+                alert(i);
                 context.drawImage(video, 0, 0, 640, 480);
                 var canvas = document.getElementById('canvas');
- 	            var dataURL = canvas.toDataURL();
-			    images = images + dataURL;
+ 	        var dataURL = canvas.toDataURL();
+			  images = images + dataURL;
                 document.getElementById('imageUrl').value = images;
             }
-
-            document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
+                       document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
 
             }, false);
         
@@ -105,7 +96,7 @@ and open the template in the editor.
 <center>
 <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
 <canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
-<form method="post" action="/register">
+<form method="post" action="/register" autocomplete="on">
     Username:<input type="text" name="username" id="username" required><br>
     <input type="hidden" id="txtUrl" name="txtUrl" value="" />
     <input type="hidden" id="imageUrl" name="imageUrl" value="" />

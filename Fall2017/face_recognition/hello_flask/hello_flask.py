@@ -78,7 +78,7 @@ def do_admin_login():
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
 
-    result = backend.login(POST_IMAGE)
+    result = backend.login(POST_IMAGE,.5)
     if result != None:
         print "CLASSIFIED SUCCESSFULLY", result
         session['logged_in'] = True

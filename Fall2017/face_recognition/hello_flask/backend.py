@@ -26,11 +26,11 @@ def register(username, image_URIs):
 
 
 #returns username
-def login(image_URI):
+def login(image_URI,confidence):
 
     if not imgURItoFile("unknown", image_URI):
         return None
-    result = main.classify(KNOWN_IMAGE_DIR)   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
+    result = main.classify(KNOWN_IMAGE_DIR,confidence)   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
     os.remove("unknown")  #cleanup
 
     return result
