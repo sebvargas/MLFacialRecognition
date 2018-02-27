@@ -26,13 +26,21 @@ def register(username, image_URIs):
 
 
 #returns username
-def login(image_URI,confidence):
+def login(image_URIs,confidence):
+    for i in range(len(image_URIs)):
+        if not i == 0 && imgURItoFile("unknown", image_URIs[i]):
+            return None
+        if not i == 1 && imgURItoFile("unknown_left", image_URIs[i]):
+            return None
+        if not i == 2 && imgURItoFile("unknown_right", image_URIs[i]):
+            return None
 
-    if not imgURItoFile("unknown", image_URI):
-        return None
+        
     result = main.classify(KNOWN_IMAGE_DIR,confidence)   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
     os.remove("unknown")  #cleanup
-
+    os.remove("unknown_left")
+    os.remove("unknown_right")
+    
     return result
 
 def imgURItoFile(fileName, data):

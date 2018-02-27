@@ -77,7 +77,10 @@ def do_admin_login():
     POST_IMAGE = str(request.form['imageUrl'])
     POST_URL = str(request.form['txtUrl'])
     POST_URL = POST_URL.split('/')[-1]
-
+    
+    IMAGES = POST_IMAGE.split("#*^/")
+    print "In register. Images len: " + str(len(IMAGES))
+    
     result = backend.login(POST_IMAGE,.5)
     if result != None:
         print "CLASSIFIED SUCCESSFULLY", result
