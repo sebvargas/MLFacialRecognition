@@ -1,0 +1,113 @@
+
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Register</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+        <!--
+    Ideally these elements aren't created until it's confirmed that the 
+    client supports video/camera, but for the sake of illustrating the 
+    elements involved, they are created with markup (not JavaScript)
+    -->
+<script>
+            window.addEventListener("DOMContentLoaded", function() {
+            // Grab elements, create settings, etc.
+            var canvas = document.getElementById('canvas');
+            var context = canvas.getContext('2d');
+            var video = document.getElementById('video');
+            document.getElementById('txtUrl').value = window.location.href;
+
+            var mediaConfig =  { video: true };
+            var errBack = function(e) {
+                console.log('An error has occurred!', e)
+            };
+
+            // Put video listeners into place
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
+                    video.src = window.URL.createObjectURL(stream);
+                    video.play();
+                });
+            }
+
+            /* Legacy code below! */
+            else if(navigator.getUserMedia) { // Standard
+                navigator.getUserMedia(mediaConfig, function(stream) {
+                    video.src = stream;
+                    video.play();
+                }, errBack);
+            } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+                navigator.webkitGetUserMedia(mediaConfig, function(stream){
+                    video.src = window.webkitURL.createObjectURL(stream);
+                    video.play();
+                }, errBack);
+            } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
+                navigator.mozGetUserMedia(mediaConfig, function(stream){
+                    video.src = window.URL.createObjectURL(stream);
+                    video.play();
+                }, errBack);
+            }
+
+
+            var count = 0;
+            var num_of_images = 1;
+            var images = "";
+
+            // Trigger photo take
+            document.getElementById('snap').addEventListener('click', function() {
+
+
+                context.drawImage(video, 0, 0, 640, 480);
+                var canvas = document.getElementById('canvas');
+                var dataURL = canvas.toDataURL();
+	        images = images + dataURL;
+                document.getElementById('imageUrl').value = images;
+
+   	    for (i=1; i < num_of_images; i++) {
+			      images = images + "#*^/";
+			      setTimeout(wait(i), 3000);
+		}
+
+            });
+
+            function wait(i) {
+		if (num_of_images != 1) {
+			  alert(i);
+		}
+                context.drawImage(video, 0, 0, 640, 480);
+                var canvas = document.getElementById('canvas');
+ 	        var dataURL = canvas.toDataURL();
+			  images = images + dataURL;
+                document.getElementById('imageUrl').value = images;
+            }
+                       document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
+
+            }, false);
+        
+
+</script>
+
+<center>
+<video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
+<canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
+<form method="post" action="/register" autocomplete="on">
+    Username:<input type="text" name="username" id="username" required><br>
+    <input type="hidden" id="txtUrl" name="txtUrl" value="" />
+    <input type="hidden" id="imageUrl" name="imageUrl" value="" />
+    <input id="snap" type="submit" id="snap" value="Log in">
+</form>
+<form method="post" action="/back">
+    <input type="submit" value="back">
+</form>
+</center>
+
+    </body>
+</html>
