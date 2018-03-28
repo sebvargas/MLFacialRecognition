@@ -22,5 +22,6 @@ RUN apt-get install -y --fix-missing \
 COPY . /app
 #COPY entrypoint.sh ./
 WORKDIR /app
-RUN pip3 install -r requirements.txt
-ENTRYPOINT python3 hello_flask.py
+RUN pip2 install -r requirements.txt
+RUN pip2 install numpy --upgrade
+ENTRYPOINT python2 hello_flask.py
