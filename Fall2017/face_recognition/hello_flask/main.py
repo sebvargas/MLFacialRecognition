@@ -7,7 +7,7 @@ def is_person(img_fp):
     results = classify_person("person_recognition/tmp/output_graph.pb","person_recognition/tmp/output_labels.txt","Mul","final_result",128,128,img_fp) #todo, 128x128 size may not always be true
 
     result = max(results, key=itemgetter(1))
-    return (result[0] == 'people') and (result[1] >= .85)
+    return (result[0] == 'people') and (result[1] >= .90)
 
 
 def safety_check():

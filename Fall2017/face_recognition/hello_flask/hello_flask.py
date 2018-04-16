@@ -28,7 +28,7 @@ def get_image():
     print 'Image received: {}'.format(image_np.shape)
     return ''
 
-@APP.route('/index')
+@APP.route('/')
 def index():
     """ Displays the index page accessible at '/'
     """
@@ -38,7 +38,7 @@ def index():
 def newHtml():
     return render_template('newhtml.html')
 
-@APP.route('/')
+@APP.route('/home')
 def home(POST_USERNAME):
     if not session.get('logged_in'):
     	return "log in failed. Click New User <a href='/index'>Back</a>"

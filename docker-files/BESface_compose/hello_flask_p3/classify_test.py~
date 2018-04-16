@@ -1,0 +1,16 @@
+import unittest
+from face_recognition.hello_flask.backend import register
+class SomeTest(unittest.TestCase):
+    def setUp(self):
+        pass
+    def tearDown(self):
+        pass
+    def runTest(self):
+        self.assertEqual(somefunction(1,22), 3)
+
+def somefunction(a,b):
+    return a+b
+
+if __name__=='__main__':
+   unittest.main()
+

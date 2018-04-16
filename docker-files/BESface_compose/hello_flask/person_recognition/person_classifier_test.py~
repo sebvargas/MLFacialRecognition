@@ -1,0 +1,11 @@
+import os
+from person_classifier import classify_person
+from operator import itemgetter
+
+results = classify_person('tmp/output_graph.pb', 'tmp/output_labels.txt', 'Mul', 'final_result', 128, 128, 'test/left_profile.jpg')
+
+print results
+print
+
+results = [('john',.77),('bob',.99),('joe',.5)]
+print max(results, key=itemgetter(1))
