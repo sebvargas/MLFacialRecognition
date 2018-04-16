@@ -139,7 +139,7 @@ def register(username, image_URIs):
 # logs a user into an account that has been tied to their face or
 # fails a log in if a user has not been registered yet.
 # @params image_URI are the images that have been taken of the user
-def login(image_URI):
+def login(image_URIs,confidence):
 
     if not imgURItoFile("unknown", image_URI):
         return None
@@ -238,7 +238,7 @@ def do_admin_login():
     POST_URL = POST_URL.split('/')[-1]
     if not backend.imgURItoFile(POST_IMAGE, "login"):
         return log_in(None)
-    result = backend.login(POST_IMAGE)
+    result = backend.login(POST_IMAGE,MEDIUM_SECURITY)
     if result != None:
         print "CLASSIFIED SUCCESSFULLY", result
         session['logged_in'] = True

@@ -9,6 +9,8 @@ import io, base64
 import sys
 import backend
 
+
+#todo, import these from backend
 LOW_SECURITY = .6
 MEDIUM_SECURITY = .5
 HIGH_SECURITY = .4
