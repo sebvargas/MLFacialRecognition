@@ -27,7 +27,7 @@ def register(username, image_URIs):
 
 #returns username
 def login(image_URIs,confidence):
-    print 'here'
+
     for i in range(len(image_URIs)):
         if i == 0 and not imgURItoFile("unknown", image_URIs[i]):
             print 'i=1 failed'
