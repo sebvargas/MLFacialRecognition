@@ -1,0 +1,33 @@
+{
+    "env": {
+      "es6": true,
+      "node": true,
+      "mocha": true
+    },
+    "rules": {
+      "no-else-return": "error",
+      "no-inner-declarations": "error",
+      "no-useless-return": "error",
+      "no-var": "error",
+      "no-new": "error",
+      "no-use-before-define": "error",
+      "no-unused-expressions": "error",
+      "no-duplicate-imports": "error",
+      "eqeqeq": "error",
+      "complexity": "error",
+      "block-scoped-var": "error",
+      "prefer-arrow-callback": "error",
+      "prefer-const": "error",
+      "no-console": ["error", { "allow": ["warn", "error"] }],
+      "curly": ["error", "multi"],
+      "no-multi-spaces": "error",
+      "no-unused-vars": ["error", { "varsIgnorePattern": "[mM]odel" }],
+      "callback-return": "error",
+      "global-require": "error",
+      "no-mixed-requires": "error",
+      "brace-style": ["error", "stroustrup"],
+      "camelcase": "error",
+      "indent": ["error", "tab"],
+      "quotes": ["error", "single"]
+    }
+}
