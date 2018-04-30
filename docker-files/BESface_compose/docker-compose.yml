@@ -1,6 +1,0 @@
-web:
-  build: ./hello_flask
-  ports:
-   - "5000:5000"
-  volumes:
-   - .:/code

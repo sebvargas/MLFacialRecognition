@@ -27,7 +27,7 @@ def register(username, image_URIs):
 
 #returns username
 def login(image_URIs,confidence):
-
+    #todo, only checking 3
     for i in range(len(image_URIs)):
         if i == 0 and not imgURItoFile("unknown", image_URIs[i]):
             print 'i=1 failed'
@@ -44,7 +44,7 @@ def login(image_URIs,confidence):
     os.remove("unknown")  #cleanup
     os.remove("unknown_left")
     os.remove("unknown_right")
-    
+
     return result
 
 def imgURItoFile(fileName, data):
