@@ -4,8 +4,18 @@ import axios from "axios"
 import swal from "sweetalert2"
 import Cookies from "../Cookies"
 import {LoginHeader, SupportText, FormFormat, FormInput, FormLabel, LoginButton} from "./Styles";
+import Webcam from 'react-webcam';
 
 class Login extends Component {
+
+  setRef = (webcam) => {
+    this.webcam = webcam;
+  }
+ 
+  capture = () => {
+    const imageSrc = this.webcam.getScreenshot();
+	alert(imageSrc);
+  };
 
 	render() {
 		return (
@@ -14,6 +24,14 @@ class Login extends Component {
 					<LoginHeader className="text-center">Login</LoginHeader>
 					<SupportText className="text-center">Welcome back, we missed you</SupportText>
 				</div>
+				<Webcam
+	          audio={false}
+	          height={150}
+	          ref={this.setRef}
+	          screenshotFormat="image/jpeg"
+	          width={150}
+       			/>
+
 				<div className="row">
 					<div className="col-sm-4 col-sm-offset-4">
 					<Formik
@@ -27,11 +45,7 @@ class Login extends Component {
 								errors.email = "Required"
 							} else if (!values.password) {
 								errors.password = "Required"
-							} else if (
-								!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-							) {
-								errors.email = "Invalid email address"
-							}
+							} 
 							return errors
 						}}
 						onSubmit={(values, { setSubmitting }) => {

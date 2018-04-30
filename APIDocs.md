@@ -9,7 +9,7 @@ password combinations, or replace them entirely. This will have to seperate comp
 the Front end and back end.
 
 
-#Front End
+#HTML Front End
 
 Our front end works with any JavaScript or HTML based front end. We use hidden fields as well as 
 camera access through JavaScript. To implement the camera onto your website, add this segment into your
@@ -48,26 +48,6 @@ the more photos we take, the harder it becomes to fool our software
                     video.play();
                 });
             }
-
-            /* Legacy code below! */
-            else if(navigator.getUserMedia) { // Standard
-                navigator.getUserMedia(mediaConfig, function(stream) {
-                    video.src = stream;
-                    video.play();
-                }, errBack);
-            } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-                navigator.webkitGetUserMedia(mediaConfig, function(stream){
-                    video.src = window.webkitURL.createObjectURL(stream);
-                    video.play();
-                }, errBack);
-            } else if(navigator.mozGetUserMedia) { // Mozilla-prefixed
-                navigator.mozGetUserMedia(mediaConfig, function(stream){
-                    video.src = window.URL.createObjectURL(stream);
-                    video.play();
-                }, errBack);
-            }
-
-
 
             // Trigger photo take
             document.getElementById('snap').addEventListener('click', function() {

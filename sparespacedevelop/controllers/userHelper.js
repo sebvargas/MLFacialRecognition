@@ -89,7 +89,7 @@ module.exports = {
 					if (!isMatch)
 						return res.sendStatus(401)
 
-					if(user.isVerified)
+					if(!user.isVerified)
 						return res.send({isMatch, id: user._id})
 					
 					res.sendStatus(404)

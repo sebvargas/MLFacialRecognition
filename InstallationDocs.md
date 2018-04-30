@@ -12,18 +12,21 @@ https://www.docker.com/kubernetes#/CE
 3) navigate to BESface_compose
 4) execute `docker-compose build`
 5) execute `docker-compose up`
-6) Now your docker container should be up and running.
+6) Now your docker container should be up and running on http://127.0.0.1:5000/.
 
 
 
 # Straight-Flask
 0) Install these dependencies
 
+	- Python 2.7
 	- Tensorflow
 	- Flask
 	- Image
+	- django < 2
 	- Numpy
-	- 
+	- Pillow
+	- face_recognition
 1) To install our software, download our *place holder name of folder of software* within the same directory as either your current Flask application folder, or at the same directory level as your current backend folder
 
 2) Refer to API Documentation for usage of our functions
