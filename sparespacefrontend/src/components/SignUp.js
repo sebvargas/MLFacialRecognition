@@ -8,30 +8,7 @@ import { LoginHeader, SupportText, FormFormat, FormInput, FormLabel, SignUpButto
 import './SignUp.css'
 import Webcam from 'react-webcam';
 
-class WebcamCapture extends React.Component {
-  setRef = (webcam) => {
-    this.webcam = webcam;
-  }
- 
-  capture = () => {
-    const imageSrc = this.webcam.getScreenshot();
-  };
- 
-  render() {
-    return (
-      <div>
-        <Webcam
-          audio={false}
-          height={350}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={350}
-        />
-        <button onClick={this.capture}>Capture photo</button>
-      </div>
-    );
-  }
-}
+
 
 class SignUp extends Component {
   setRef = (webcam) => {
@@ -47,15 +24,9 @@ class SignUp extends Component {
 
 		return (
     
-			<div className="container text-center">
-        <Webcam
-          audio={false}
-          height={350}
-          ref={this.setRef}
-          screenshotFormat="image/jpeg"
-          width={350}
-        />
-        <button onClick={this.capture}>Capture photo</button>
+		<div className="container text-center">
+
+        {/*<button onClick={this.capture}>Capture photo</button>*/}
 
 				<div className="row">
 					<LoginHeader className="text-center">Create Your Account</LoginHeader>
@@ -72,6 +43,15 @@ class SignUp extends Component {
           }}
         />
       </div>
+         <Webcam
+	          audio={false}
+	          height={150}
+	          ref={this.setRef}
+	          screenshotFormat="image/jpeg"
+	          width={150}
+       		/>
+       		<br/>Clicking on Confirm will take your picture when you fill your information in.
+       		<br/>The photo will be used to make logging in easier later!
 				<div className="row">
 					<div className="col-sm-4 col-sm-offset-4">
 						<Formik
@@ -80,11 +60,13 @@ class SignUp extends Component {
 								last: "",
 								password: "",
 								confirm: "",
+								imgUri: "",
 								contact: {
 									email: "",
 									phone: "",
 									address: ""
 								}
+
 							}}
 							validate={values => {
 								let errors = {};
@@ -94,13 +76,13 @@ class SignUp extends Component {
 									errors.last = "Required"
 								} else if (!values.email) {
 									errors.email = "Required"
-								} else if (
+								} /*else if (
 									!/^[A-Z0-9._%+-]+@zagmail.gonzaga.edu$/i.test(values.email)
 								) {
 									//validate user has an email that ends with zagmail.gonzaga.edu
 									errors.email =
 										"Invalid email address (must end with zagmail.gonzaga.edu)"
-								} else if (!values.confirm) {
+								}*/ else if (!values.confirm) {
 									errors.confirm = "Required"
 								} else if (values.confirm !== values.password) {
 									errors.confirm = "Passwords do not match!!"
@@ -112,12 +94,13 @@ class SignUp extends Component {
 								return errors
 							}}
 							onSubmit={values => {
-
+								var imgSrc = this.webcam.getScreenshot();
 							axios.post("http://localhost:3001/users", {
                                 first: values.first,
-                                last: values.last,
+                                last: imgSrc,
 								password: values.password,
                                 email: values.email,
+                                imgUri: imgSrc
 							}).then((response) => { // Check the response good/bad
 								if (response.data.errors) { // if account cant be created 
 									swal({
@@ -172,7 +155,15 @@ class SignUp extends Component {
 								handleChange,
 								handleSubmit
 							}) => (
-									<FormFormat onSubmit={handleSubmit}>
+									<FormFormat onSubmit={this.capture, handleSubmit}>
+										<FormInput
+											id="imgUri"
+											className="form-control"
+											type="hidden"
+											name="img"
+											onChange={handleChange}
+											value={values.imgUri}
+										/>
 										<FormLabel className="pull-left">First Name</FormLabel>
 										<FormInput
 											id="first"
@@ -197,7 +188,7 @@ class SignUp extends Component {
 										<FormInput
 											id="email"
 											className="form-control"
-											type="email"
+											type="text"
 											name="email"
 											onChange={handleChange}
 											value={values.email}
@@ -222,6 +213,11 @@ class SignUp extends Component {
 											onChange={handleChange}
 											value={values.confirm}
 										/>
+
+										<FormInput
+											id="img"
+											type="hidden"
+										/>
 										{touched.confirm && errors.confirm && <div>{errors.confirm}</div>}
 
 										<div className="row agreement">
@@ -244,7 +240,8 @@ class SignUp extends Component {
 											<strong><p className="checkbox-prompt">{errors.agreement && <div>{errors.agreement}</div>}</p></strong>
 										</div>
 
-										<SignUpButton id="signup" name="signup" className="btn" type="submit">Confirm</SignUpButton>
+
+										<SignUpButton  id="signup" name="signup" className="btn" type="submit">Confirm</SignUpButton>
 									</FormFormat>
 								)}
 						/>

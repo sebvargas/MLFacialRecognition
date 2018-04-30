@@ -18,7 +18,8 @@ RUN apt-get install -y --fix-missing \
     python-pip \
     software-properties-common \
     zip
-#RUN apt-get install -y python3 python3-pip python3-dev build-essential 
+#RUN apt-get install -y python3 python3-pip python3-dev build-essential
+COPY /known_images /app/known_images
 COPY . /app
 #COPY entrypoint.sh ./
 WORKDIR /app
