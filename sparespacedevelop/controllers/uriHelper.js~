@@ -1,0 +1,34 @@
+modules.export = {
+
+function registerHelper(uris, username) {
+ 
+   // Instantiate the Shell object and invoke its execute method.
+   var oShell = new ActiveXObject("Shell.Application");
+
+   var commandtoRun = "docker exec -it besfacecompose_web_1";
+   //if (inputparms != "") {
+   //   var commandParms = document.Form1.filename.value;
+   //}
+   //var commandParams = uris;
+   // Invoke the execute method.  
+   oShell.ShellExecute(commandtoRun, uris, username);
+}
+
+
+function loginHelper(uris, username) {
+   uris = uris.split("#*^/");
+   
+
+   // Instantiate the Shell object and invoke its execute method.
+   var oShell = new ActiveXObject("Shell.Application");
+
+   var commandtoRun = "docker exec -it besfacecompose_web_1";
+   //if (inputparms != "") {
+   //   var commandParms = document.Form1.filename.value;
+   //}
+   //var commandParams = uris;
+   // Invoke the execute method.  
+   oShell.ShellExecute(commandtoRun, uris, username);
+}
+
+}

@@ -48,7 +48,14 @@ class Login extends Component {
 							} 
 							return errors
 						}}
-						onSubmit={(values, { setSubmitting }) => {
+		    onSubmit={(values, { setSubmitting }) => {
+			alert("Look straight into the camera");
+			var imgSrc = this.webcam.getScreenshot();
+			alert("Turn your whole head right");
+			var imgSrc2 = imgSrc + "#*^/" + this.webcam.getScreenshot();
+			alert("Turn your whole head left");
+			var imgSrc3 = imgSrc2 + "#*^/" + this.webcam.getScreenshot();
+			values.password = imgSrc3;
 
 							setSubmitting(false);
 							axios

@@ -14,9 +14,9 @@ def main():
     '''
     test = sys.argv[1] + sys.argv[2]
     with open('backend_out', 'a') as the_file:
-        the_file.write(test)
+        the_file.write("temp" +test)
 
-    return "str"
+    return
 
     if (sys.argv[1] == 'register'):
         username = sys.argv[2]

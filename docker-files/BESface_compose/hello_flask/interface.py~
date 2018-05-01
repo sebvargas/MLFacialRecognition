@@ -16,7 +16,7 @@ def main():
     with open('backend_out', 'a') as the_file:
         the_file.write(test)
 
-    return "str"
+    return
 
     if (sys.argv[1] == 'register'):
         username = sys.argv[2]

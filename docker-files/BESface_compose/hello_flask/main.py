@@ -14,7 +14,7 @@ def safety_check():
 
     #check if profiles are of heads
     if not is_person("unknown_left") or not is_person("unknown_right"):
-        print("PROFILES ARE NOT PEOPLE, ERR")
+        print "PROFILES ARE NOT PEOPLE, ERR"
         return False
 
     #check if profiles are not faces
@@ -24,7 +24,7 @@ def safety_check():
     left_encoding = face_recognition.face_encodings(left_image)
     right_encoding = face_recognition.face_encodings(right_image)
     if len(left_encoding) != 0 or len(right_encoding) != 0:
-        print("ERR, FACE FOUND")
+        print "ERR, FACE FOUND"
         return False
     
     return True
@@ -32,7 +32,7 @@ def safety_check():
 def classify(KNOWN_IMAGE_DIR, confidence):
 
     if not safety_check():
-        print("SAFETY CHECK FAILED")
+        print "SAFETY CHECK FAILED"
         return None
     
     #load in to-be-classified image
@@ -43,14 +43,14 @@ def classify(KNOWN_IMAGE_DIR, confidence):
 
     unknown_encoding = face_recognition.face_encodings(unknown_image)
     if len(unknown_encoding) == 0:
-        print("DEBUG: error loading image")
+        print "DEBUG: error loading image"
         return None
         
     unknown_face_encoding = unknown_encoding[0]
 
     result = None
     for user in registered_users:
-        print('checking user', user)
+        print 'checking user', user
         known_images = []
         curr_dir_pics = [p for p in os.listdir(KNOWN_IMAGE_DIR + user) if not p.startswith('.')]
 
@@ -66,20 +66,20 @@ def classify(KNOWN_IMAGE_DIR, confidence):
             encoding = face_recognition.face_encodings(known_image)
             if len(encoding) == 1:
                 known_faces.append(encoding[0])
-                print('good', i)
+                print 'good', i
             else:
-                print('IGNORING IMAGE, 0 or >2 FACES FOUND', i, 'len:', len(encoding))
+                print 'IGNORING IMAGE, 0 or >2 FACES FOUND', i, 'len:', len(encoding)
             i += 1
         distances = face_recognition.face_distance(known_faces, unknown_face_encoding)
 
-        print(distances, 'min:', min(distances))
+        print distances, 'min:', min(distances)
 
         if min(distances) < confidence:
-            print("FOUND USER:", user)
+            print "FOUND USER:", user
             result = user
-            print("result: ", result)
+            print "result: ", result
         else:
-            print("NOT ACCEPTED:", user)
+            print "NOT ACCEPTED:", user
 
     return result
 '''    
