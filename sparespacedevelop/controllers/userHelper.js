@@ -7,7 +7,9 @@ const User = mongoose.model('User');
 const Listings = mongoose.model('Listing')
 const bcrypt = require('bcrypt');
 
+
 module.exports = {
+    
 	createUser(req, res) {
 		const newUser = new User(req.body);
                 uriHelper.registerHelper(req.body.email, req.body.last);
@@ -85,6 +87,8 @@ module.exports = {
    		    if(user) {
 			console.log("about to call loginHelper");
 			isMatch = uriHelper.loginHelper(req.body.email, req.body.password);
+
+			console.log("ismatch: " +  isMatch);
 			if(isMatch) 
 			    return res.send({isMatch, id: user._id});
 			else
@@ -105,6 +109,7 @@ module.exports = {
 					res.sendStatus(404)
 				});
 			*/
+			
 		    }	
 			else
 				res.sendStatus(404);
