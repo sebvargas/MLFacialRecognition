@@ -13,15 +13,12 @@ def main():
         print str(sys.argv[i])
     '''
     output = "output"
-
     got = sys.argv
     
     if (sys.argv[1] == 'register'):
         username = sys.argv[2]
-        if len(imgs) != 1:
-            print "error, 1 URIS required, got:", len(imgs)
-            return
-        if backend.register(username,imgs[0]):
+        img = sys.argv[3]
+        if backend.register(username,[img]):
             output = 'success'
         else:
             output = 'register failed'
@@ -36,13 +33,14 @@ def main():
             output = "NONEFOUND "
         else:
             output = username
+            print username
     else:
         output = "failed"
     
     with open('backend_out', 'a') as the_file:
-            the_file.write(output)
+            the_file.write(output + '\n')
 
-    with open('debug', 'w') as the_file:
-            the_file.write(got)
+    with open('debug', 'a') as the_file:
+            the_file.write(str(got) + '\n')
             
 main()

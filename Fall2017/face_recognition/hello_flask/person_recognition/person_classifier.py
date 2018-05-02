@@ -104,7 +104,7 @@ def classify_person(model_file, label_file, input_layer, output_layer, input_mea
   mOutput = []
   for i in top_k:
     mOutput.append((labels[i], results[i]))
-    print(labels[i], results[i])
+    #print(labels[i], results[i])
   
   
   
@@ -178,8 +178,7 @@ if __name__ == "__main__":
 
   top_k = results.argsort()[-5:][::-1]
   labels = load_labels(label_file)
-  for i in top_k:
-    print(labels[i], results[i])
+
 
 
 

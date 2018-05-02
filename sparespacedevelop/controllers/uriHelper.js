@@ -3,11 +3,11 @@ const { exec } = require('child_process');
 module.exports = {
 
     registerHelper(username, uri) {
-    
-	exec('docker exec flamboyant_swanson python interface.py register ' + username + ' "' + uri + '"', (err, stdout, stderr) => {
+	console.log("in register helper, username:" + username);
+	exec('docker exec cont1 python interface.py register ' + username + ' "' + uri + '"', (err, stdout, stderr) => {
 	if (err) {
 	    console.log('error: ' + err);
-	    return
+	    return;
 	}
 	console.log(stdout);
     });
@@ -18,16 +18,19 @@ module.exports = {
 loginHelper(username, uris) {
    uris = uris.split("#*^/");
 
-    console.log("in login helper");
+    console.log("in login  helper ");
     console.log(uris.length);
-    console.log(uris[0]);
-    exec('docker exec flamboyant_swanson python interface.py login "' + uris[0] + '" "' + uris[1] + '" "' + uris[2] + '"', (err, stdout, stderr) => {
+    exec('docker exec cont1 python interface.py login "' + uris[0] + '" "' + uris[1] + '" "' + uris[2] + '"', (err, stdout, stderr) => {
 	if (err) {
 	    console.log('error: ' + err);
-	    return
+	    return;
 	}
-	console.log(stdout);
+	console.log("here:" + stdout + ", username:" + username);
+	console.log(stdout.replace(/(\r\n\t|\n|\r\t)/gm,"") == username);
+	return (stdout.replace(/(\r\n\t|\n|\r\t)/gm,"") == username);
     });
+
+    
 }
 
 }

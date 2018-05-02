@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 module.exports = {
 	createUser(req, res) {
 		const newUser = new User(req.body);
-                //uriHelper.registerHelper(req.body.email, req.body.last);
+                uriHelper.registerHelper(req.body.email, req.body.last);
 		newUser.save((err, user) => {
 			if (err) 
 				return res.json(err);
@@ -84,8 +84,12 @@ module.exports = {
 
    		    if(user) {
 			console.log("about to call loginHelper");
-			uriHelper.loginHelper(req.body.email, req.body.password);
-			//return res.send({isMatch, id: user._id})
+			isMatch = uriHelper.loginHelper(req.body.email, req.body.password);
+			if(isMatch) 
+			    return res.send({isMatch, id: user._id});
+			else
+			    res.sendStatus(404);
+			/*return res.send({isMatch, id: user._id})
 		    
 
 				user.comparePassword(req.body.password, (err, isMatch) => {
@@ -100,6 +104,7 @@ module.exports = {
 					
 					res.sendStatus(404)
 				});
+			*/
 		    }	
 			else
 				res.sendStatus(404);

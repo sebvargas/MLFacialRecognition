@@ -108,8 +108,8 @@ class SignUp extends Component {
 										content: "Log in!",
 										icon: "success"
 									}).then(() => { // redirect to login page
-										window.location.href = "/login"
-                                        return <Redirect to="/login" />
+										window.location.href = "/home"
+                                        return <Redirect to="/home" />
 									});
 								} else { // if account can be created
 									swal({
@@ -117,14 +117,14 @@ class SignUp extends Component {
 										content: "Let's Go!",
 										icon: "success"
 									}).then(() => {
-										axios.post("http://localhost:3001/login", {
+										axios.post("http://localhost:3001/home", {
 											email: values.email,
 											password: values.password
 										})
 										.then(function(response) {
 											Cookies.loginUser(response.data.id, response.data.v)
-											window.location.href = "/users/" + response.data.id
-											return <Redirect to="/logged_in" />
+											window.location.href = "/home/" 
+											return <Redirect to="/home" />
 										})
 									})
 								}

@@ -20,7 +20,7 @@ def register(username, image_URIs):
         if imgURItoFile(str(i), image_URIs[i]):
             shutil.move(fileName,KNOWN_IMAGE_DIR + username)  #todo, check if image is already there
         else:
-            print "ERROR!"
+            print "ERROR in register!"
             return False
     return True
 
