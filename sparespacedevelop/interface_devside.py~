@@ -1,0 +1,6 @@
+def main():
+    print "in interface_devside.py"
+    return "in interface_dev!"
+
+
+main()

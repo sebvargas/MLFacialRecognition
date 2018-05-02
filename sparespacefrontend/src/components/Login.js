@@ -43,8 +43,6 @@ class Login extends Component {
 							let errors = {}
 							if (!values.email) {
 								errors.email = "Required"
-							} else if (!values.password) {
-								errors.password = "Required"
 							} 
 							return errors
 						}}
@@ -91,19 +89,10 @@ class Login extends Component {
 										placeholder="Email"
 										onChange={handleChange}
 										value={values.email}
-									/>
+							/>
+									
 									{touched.email && errors.email && <div>{errors.email}</div>}
-									<FormLabel className="pull-left">Password</FormLabel>
-									<FormInput
-										id="password"
-										className="form-control"
-										type="password"
-										name="password"
-										placeholder="Password"
-										onChange={handleChange}
-										value={values.password}
-									/>
-									{touched.password && errors.password && <div>{errors.password}</div>}
+									
 								<LoginButton className="btn" type="submit">Log In</LoginButton>
 							</FormFormat>
 						)}
