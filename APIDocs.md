@@ -100,35 +100,18 @@ for the video, as well as
 
 Our backend simply uses 2 main functions
 
-# registers a username and links the images taken to that username
-# This function would be called when the user registers for a new account
-# @params username is a string that the user inputs when registering
-# @image_URIs are the images that have been taken of the user
+registers a username and links the images taken to that username
+This function would be called when the user registers for a new account
+@params username is a string that the user inputs when registering
+@image_URIs are the images that have been taken of the user
 def register(username, image_URIs):
-    os.makedirs(KNOWN_IMAGE_DIR + username + "/")   #todo try catch, multiple users same name?
-    for i in range(0,len(image_URIs)):
-	fileName = str(i)
-        if imgURItoFile(str(i), image_URIs[i]):
-            shutil.move(fileName,KNOWN_IMAGE_DIR + username)  #todo, check if image is already there
-        else:
-            print "ERROR!"
-    return False
 
 
-#returns username
-# logs a user into an account that has been tied to their face or
-# fails a log in if a user has not been registered yet.
-# @params image_URI are the images that have been taken of the user
+returns username
+ logs a user into an account that has been tied to their face or
+ fails a log in if a user has not been registered yet.
+ @params image_URI are the images that have been taken of the user
 def login(image_URIs,confidence):
-
-    if not imgURItoFile("unknown", image_URI):
-        return None
-    result = main.classify()   #todo, make sure unknown is saved and recent. This may cause problems if multiple people try and log in at once. Make separate, dedicated thread on server per login request?
-    os.remove("unknown")  #cleanup
-
-    return result
-
-where KNOWN_IMAGE_DIR = "known_images/" 
 
 
 
