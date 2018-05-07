@@ -1,4 +1,4 @@
-#InstallationDocs
+## InstallationDocs
 
 # Docker-based software
 If you are running your own Flask server, or would rather not use Docker, skip this.
@@ -14,7 +14,7 @@ https://www.docker.com/kubernetes#/CE
 4) execute `docker build -t cont1 .`
 5) execute `docker run --name cont1 cont1`
 
-Troubleshooting:
+# Troubleshooting:
 
 Taken from https://docs.docker.com/install/linux/linux-postinstall/  
 Docker requires root access:  

@@ -1,6 +1,4 @@
-(Place Holder name for our software)
-
-API Documentation for Flask Backend with JavaScript frontend
+# API Documentation for Flask Backend with JavaScript frontend  
 
 
 This API is designed to allow web developers to implement a facial recognition
@@ -9,7 +7,7 @@ password combinations, or replace them entirely. This will have to seperate comp
 the Front end and back end.
 
 
-#HTML Front End
+## HTML Front End
 
 Our front end works with any JavaScript or HTML based front end. We use hidden fields as well as 
 camera access through JavaScript. To implement the camera onto your website, add this segment into your
