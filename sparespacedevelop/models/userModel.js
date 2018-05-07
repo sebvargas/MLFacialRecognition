@@ -11,7 +11,7 @@ const user = new Schema({
 	password: { type: String, required: true },
 	email: { type: String, required: true, unique: true },
 	listings: [{type: Schema.Types.ObjectId, ref: 'Listing'}],
-	isVerified: { type: Boolean, default: false }
+	isVerified: { type: Boolean, default: true }
 },{ collection: 'sparespaceusers' });
 
 //before save encrypt password

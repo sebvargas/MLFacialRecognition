@@ -7,7 +7,7 @@ def is_person(img_fp):
     results = classify_person("person_recognition/tmp/output_graph.pb","person_recognition/tmp/output_labels.txt","Mul","final_result",128,128,img_fp) #todo, 128x128 size may not always be true
 
     result = max(results, key=itemgetter(1))
-    return (result[0] == 'people') and (result[1] >= .90)
+    return (result[0] == 'people') and (result[1] >= .60)
 
 
 def safety_check():
@@ -50,7 +50,7 @@ def classify(KNOWN_IMAGE_DIR, confidence):
 
     result = None
     for user in registered_users:
-        print 'checking user', user
+        #print 'checking user', user
         known_images = []
         curr_dir_pics = [p for p in os.listdir(KNOWN_IMAGE_DIR + user) if not p.startswith('.')]
 
@@ -66,20 +66,20 @@ def classify(KNOWN_IMAGE_DIR, confidence):
             encoding = face_recognition.face_encodings(known_image)
             if len(encoding) == 1:
                 known_faces.append(encoding[0])
-                print 'good', i
-            else:
-                print 'IGNORING IMAGE, 0 or >2 FACES FOUND', i, 'len:', len(encoding)
+            #else:
+            #    print 'IGNORING IMAGE, 0 or >2 FACES FOUND', i, 'len:', len(encoding)
             i += 1
         distances = face_recognition.face_distance(known_faces, unknown_face_encoding)
 
-        print distances, 'min:', min(distances)
+        #print distances, 'min:', min(distances)
 
         if min(distances) < confidence:
-            print "FOUND USER:", user
+            #print "FOUND USER:", user
             result = user
-            print "result: ", result
-        else:
-            print "NOT ACCEPTED:", user
+            #print "result: ", result
+            return result
+        #else:
+            #print "NOT ACCEPTED:", user
 
     return result
 '''    

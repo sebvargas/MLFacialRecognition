@@ -20,9 +20,10 @@ RUN apt-get install -y --fix-missing \
     zip
 #RUN apt-get install -y python3 python3-pip python3-dev build-essential
 COPY /known_images /app/known_images
-COPY . /app
+COPY requirements.txt /app
 #COPY entrypoint.sh ./
 WORKDIR /app
 RUN pip2 install -r requirements.txt
 RUN pip2 install numpy --upgrade
+COPY . /app
 ENTRYPOINT python2 hello_flask.py
