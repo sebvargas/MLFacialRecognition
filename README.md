@@ -10,6 +10,6 @@ being sent to our backend, it should work!
 [APIDocs.md](APIDocs.md)
 
 ## Developed by
-[Sebastian Vargas](https://github.com/sebvargas)
-[Brian Mackessy](https://github.com/brianmackessy)
-[Elijah Michaelson](https://github.com/elijahmichaelson)
+[Sebastian Vargas](https://github.com/sebvargas) ,
+[Brian Mackessy](https://github.com/brianmackessy) ,
+[Elijah Michaelson](https://github.com/elijahmichaelson) ,
