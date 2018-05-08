@@ -6,7 +6,7 @@ we provide sample camera front end components, as long as the right data is
 being sent to our backend, it should work!  
 ## Installation
 [InstallationDocs.md](InstallationDocs.md)
-## API Docs and USage
+## API Docs and Usage
 [APIDocs.md](APIDocs.md)
 
 ## Developed by
