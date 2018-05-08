@@ -73,7 +73,7 @@ You can also implement your own camera if you wish, as long as you pass the righ
 
 Then for the body of the HTML, you must have these named fields
 for the video, as well as 
-```
+```HTML
 <center>
 <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
 <canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
