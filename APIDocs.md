@@ -24,50 +24,50 @@ the more photos we take, the harder it becomes to fool our software
 
 You can also implement your own camera if you wish, as long as you pass the right arguments onto our backend
 
-`<script>
-            var count = 0;
-            var num_of_images = 5;
-            var images = "";
-            window.addEventListener("DOMContentLoaded", function() {
-            // Grab elements, create settings, etc.
-            var canvas = document.getElementById('canvas');
-            var context = canvas.getContext('2d');
-            var video = document.getElementById('video');
-            document.getElementById('txtUrl').value = window.location.href;
-            var mediaConfig =  { video: true };
-            var errBack = function(e) {
-                console.log('An error has occurred!', e)
-            };
-            // Put video listeners into place
-            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia(mediaConfig).then(function(stream) {
-                    video.src = window.URL.createObjectURL(stream);
-                    video.play();
-                });
-            }
-            // Trigger photo take
-            document.getElementById('snap').addEventListener('click', function() {
-                context.drawImage(video, 0, 0, 640, 480);
-                var canvas = document.getElementById('canvas');
-                var dataURL = canvas.toDataURL();
-	        images = images + dataURL;
-                document.getElementById('imageUrl').value = images;
-   	    for (i=1; i < num_of_images; i++) {
-			      images = images + "#*^/";
-			      setTimeout(wait(i), 3000);
-		}
-            });
-            function wait(i) {
-                alert(i);
-                context.drawImage(video, 0, 0, 640, 480);
-                var canvas = document.getElementById('canvas');
- 	        var dataURL = canvas.toDataURL();
-			  images = images + dataURL;
-                document.getElementById('imageUrl').value = images;
-            }
-                       document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
-            }, false);
-</script>
+`<script>  
+            var count = 0;  
+            var num_of_images = 5;  
+            var images = "";  
+            window.addEventListener("DOMContentLoaded", function() {  
+            // Grab elements, create settings, etc.  
+            var canvas = document.getElementById('canvas');  
+            var context = canvas.getContext('2d');  
+            var video = document.getElementById('video');  
+            document.getElementById('txtUrl').value = window.location.href;  
+            var mediaConfig =  { video: true };  
+            var errBack = function(e) {  
+                console.log('An error has occurred!', e)  
+            };  
+            // Put video listeners into place  
+            if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {  
+                navigator.mediaDevices.getUserMedia(mediaConfig).then(function(  stream) {  
+                    video.src = window.URL.createObjectURL(stream);  
+                    video.play();  
+                });  
+            }  
+            // Trigger photo take  
+            document.getElementById('snap').addEventListener('click', function() {  
+                context.drawImage(video, 0, 0, 640, 480);  
+                var canvas = document.getElementById('canvas');  
+                var dataURL = canvas.toDataURL();  
+	        images = images + dataURL;  
+                document.getElementById('imageUrl').value = images;  
+   	    for (i=1; i < num_of_images; i++) {  
+			      images = images + "#*^/";  
+			      setTimeout(wait(i), 3000);  
+		}  
+            });  
+            function wait(i) {  
+                alert(i);  
+                context.drawImage(video, 0, 0, 640, 480);  
+                var canvas = document.getElementById('canvas');  
+ 	        var dataURL = canvas.toDataURL();  
+			  images = images + dataURL;  
+                document.getElementById('imageUrl').value = images;  
+            }  
+                       document.getElementById("canvas").appendChild(  convertCanvasToImage(canvas));  
+            }, false);  
+</script>  
 `
 
 Then for the body of the HTML, you must have these named fields
