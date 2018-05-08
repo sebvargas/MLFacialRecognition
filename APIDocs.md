@@ -24,7 +24,8 @@ the more photos we take, the harder it becomes to fool our software
 
 You can also implement your own camera if you wish, as long as you pass the right arguments onto our backend
 
-`<script>  
+```javascript
+<script>  
             var count = 0;  
             var num_of_images = 5;  
             var images = "";  
@@ -68,11 +69,11 @@ You can also implement your own camera if you wish, as long as you pass the righ
                        document.getElementById("canvas").appendChild(  convertCanvasToImage(canvas));  
             }, false);  
 </script>  
-`
+```
 
 Then for the body of the HTML, you must have these named fields
 for the video, as well as 
-
+```
 <center>
 <video id="video" width="640" height="480" style="border: 1px solid black;" autoplay></video>
 <canvas id="canvas" width="640" height="480"  style="border: 1px solid black;"></canvas>
@@ -86,10 +87,10 @@ for the video, as well as
     <input type="submit" value="back">
 </form>
 </center>
+```
+# Backend
 
-#Backend
-
-##if using a Flask backend
+## if using a Flask backend
 
 You may want to just import our backend.py
 
@@ -115,7 +116,8 @@ The file can be found in the docker-files folder
 Simply import the module and the following functions can be called where they are necessary  
   
 
-// Takes the username and the picture of the user when they register and returns an   // error if the user was not successfully registered  
+// Takes the username and the picture of the user when they register and returns an  
+// error if the user was not successfully registered  
 // username must be a string  
 // uri must be the URI of the image that is encoded in base64  
 registerHelper(username, uri)
