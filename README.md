@@ -1,37 +1,11 @@
-# MLFacialRecognition
-Machine Learning on Facial Recognition
-
-# Important dates
-Wed 2/28 Project Status Presentation
-Wed 4/25 Final Proj. Rep
-Wed 5/2  Design Exp Proj Pres
-Wed 5/9 Final Deliverable (20% grade) 
-
-# CPSC Checklist
-https://docs.google.com/spreadsheets/d/1xzCPyRoO7XPjTXlf7PU7pdMy1TYnAnTil5oFXNg6wr4/edit#gid=0
-
-# CPSC Tasklist
-https://docs.google.com/spreadsheets/d/1I8XX6gWBlDYND57pcETQVj78WtveGE0wQcdlFozCU2w/edit#gid=0
-
-# CPSC Plan (Outdated. Check Fall Status Report)
-https://docs.google.com/document/d/1D5RLhgtwIQoQFnAnOa8iINn1u05oPitlCvCUJX2JyvU/edit
-
-# Product Backlog
-https://docs.google.com/spreadsheets/d/1D1U_9JfSLI372lYSmCiTS_RIj0skpUXs9QlWKOzzdY8/edit#gid=0
-
-# Trello Sprint Page
-https://trello.com/b/WHm96AUY/senior-design-machine-learning
-
-# First Presentation
-October 18 2017
-https://docs.google.com/presentation/d/1mluXutELvBn_NfMjI1hl6sD70UayW_fbxwLj5GYTk0U/edit?usp=sharing
-Have Presentation done by October 11 2017 to show Dr. Guizani
-
-# Fall Semester Status Report
-December 14 2017
-https://docs.google.com/document/d/1T0qqI2U3xcnHPpaKTUZ6z49pPS1e8bm-bF3wBU6qyyM/edit
-
-# Meeting Times
-w/ Advisor Wednesday 2:30 pm   
-w/ Group Sunday 8pm-10pm, Friday 2pm-5pm
+# Facial Recognition Log In and Sign Up API  
+This software is an API for web developers to implement facial recognition  
+sign up and log in into their websites.  
+It uses Docker to allow our software to work with most backends, and while  
+we provide sample camera front end components, as long as the right data is  
+being sent to our backend, it should work!  
+## Installation
+[Installation.md](Installation.md)
+## API Docs and USage
+[API.md](Installation.md)
 
