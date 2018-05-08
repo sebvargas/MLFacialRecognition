@@ -208,12 +208,12 @@ To start up a clone you must have the following installed in addition to our ins
 4. [Node.js](https://nodejs.org/en/)
 
 Then once npm is installed, do npm install on each of the following:
-5. [travis-ci](https://travis-ci.org/)
-6. [mocha](https://mochajs.org/)
-7. [eslint](https://eslint.org/)
-8. [chai](http://chaijs.com/)
-9. [nodemailer](https://nodemailer.com/about/)
-10. [mongoose](http://mongoosejs.com/)
+5. [travis-ci](https://travis-ci.org/)  
+6. [mocha](https://mochajs.org/)  
+7. [eslint](https://eslint.org/)  
+8. [chai](http://chaijs.com/)  
+9. [nodemailer](https://nodemailer.com/about/)  
+10. [mongoose](http://mongoosejs.com/)  
 
 then navigate to the sparespacefrontend folder and run
 `npm install && npm start`  
