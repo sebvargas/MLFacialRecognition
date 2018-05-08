@@ -1,7 +1,7 @@
-## InstallationDocs
+# InstallationDocs
 
-# Docker-based software
-If you are running your own Flask server, or would rather not use Docker, skip this.
+## Docker-based software
+If you are running your own Flask server, you can just use our backend.py file in redPanda in docker-files.  
 - To run using our docker container, you must have Docker installed. Check the website below to install docker
 https://www.docker.com/kubernetes#/CE
 
@@ -10,11 +10,24 @@ https://www.docker.com/kubernetes#/CE
 
 1) Starting Docker
 2) Navigate to our Docker folder in terminal/console
-3) navigate to BESface_compose
+3) navigate to the redPanda folder
 4) execute `docker build -t cont1 .`
 5) execute `docker run --name cont1 cont1`
+6) Refer to API Docs on how to interact with the container
 
-# Troubleshooting:
+### for React.js
+7) Use the urihelper.js file
+8) Refer to API Docs on how to call its functions 
+
+
+## Try It Out!
+To try a proof of concept of our software, go to our hello_flask folder in docker-files do the following  
+1) start docker
+2) docker build -t hello_flask .
+3) docker run --name hello_flask hello_flask
+4) Go to 
+
+## Troubleshooting:
 
 Taken from https://docs.docker.com/install/linux/linux-postinstall/  
 Docker requires root access:  
@@ -25,5 +38,5 @@ Add the connected user "$USER" to the docker group. Change the user name to matc
 Either do a `newgrp docker` or log out/in to activate the changes to groups.  
 You can use  
 `docker run hello-world`  
-to check if you can run docker without sudo.  
+to check if you can run docker without sudo. 
 

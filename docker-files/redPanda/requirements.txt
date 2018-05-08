@@ -1,0 +1,5 @@
+Flask==0.10.1
+Pillow
+django<2
+face_recognition
+tensorflow
