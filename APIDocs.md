@@ -88,6 +88,65 @@ for the video, as well as
 </form>
 </center>
 ```
+
+## React Component
+Below is a React component that you could use, but feel free to use your own. The important part is to get the URIs of the images.
+
+```javascript
+import Webcam from 'react-webcam';
+class SignUp extends Component {
+  setRef = (webcam) => {
+    this.webcam = webcam;
+  }
+ 
+  capture = () => {
+    const imageSrc = this.webcam.getScreenshot();
+    alert(imageSrc);
+  };
+
+    render() {
+
+        return (
+                <img
+              style={style.captureImage}
+              ref={(img) => {
+                this.img = img;
+              }}
+                />
+
+            <Webcam
+              audio={false}
+              height={150}
+              ref={this.setRef}
+              screenshotFormat="image/jpeg"
+              width={150}
+            />
+            )
+        };
+```
+
+and call
+```javascript                                 
+var imgSrc = this.webcam.getScreenshot();
+```
+
+on the button you want to take the picture of.
+
+If you would like to take multiple pictures, you can do something like this: 
+```javascript
+            alert("Look straight into the camera");
+            var imgSrc0 = this.webcam.getScreenshot();
+            alert("Turn your whole head right");
+            var imgSrc1 = imgSrc + "#*^/" + this.webcam.getScreenshot();
+            alert("Turn your whole head left");
+            var imgSrc = imgSrc2 + "#*^/" + this.webcam.getScreenshot();
+```
+
+imgSrc would be the URI values that you would pass onto the backend.
+
+Note: This set of characters "#*^/" is used to identify each individual URI if there is more than one being sent  
+
+
 # Backend
 
 ## if using a Flask backend
@@ -96,18 +155,18 @@ You may want to just import our backend.py
 
 Our backend simply uses 2 main functions
 
-registers a username and links the images taken to that username
-This function would be called when the user registers for a new account
-@params username is a string that the user inputs when registering
-@image_URIs are the images that have been taken of the user given as an array of images
-def register(username, image_URIs):
+registers a username and links the images taken to that username  
+This function would be called when the user registers for a new account  
+@params username is a string that the user inputs when registering  
+@image_URIs are the images that have been taken of the user given as an array of images  
+`def register(username, image_URIs):  `
 
 
-returns username
- logs a user into an account that has been tied to their face or
- fails a log in if a user has not been registered yet.
- @params image_URI are the images that have been taken of the user given as an array of images
-def login(image_URIs,confidence):
+returns username  
+ logs a user into an account that has been tied to their face or  
+ fails a log in if a user has not been registered yet.  
+ @params image_URI are the images that have been taken of the user given as an array of images  
+`def login(image_URIs,confidence): ` 
 
 ## React Backend
 
@@ -116,20 +175,56 @@ The file can be found in the docker-files folder
 Simply import the module and the following functions can be called where they are necessary  
   
 
-// Takes the username and the picture of the user when they register and returns an  
-// error if the user was not successfully registered  
-// username must be a string  
-// uri must be the URI of the image that is encoded in base64  
-registerHelper(username, uri)
+Takes the username and the picture of the user when they register and returns an  
+error if the user was not successfully registered  
+@username must be a string  
+@uri must be the URI of the image that is encoded in base64  
+`registerHelper(username, uri)`
 
-// Takes the username and an array of URIs of pictures of the user and     
-// returns true if the user is verified and false otherwise  
-// username must be a string  
-// uris must be an array of images of the user, each encoded in base64  
-loginhelper(username,uris)
+Takes the username and an array of URIs of pictures of the user and     
+returns true if the user is verified and false otherwise  
+@username must be a string  
+@uris must be an array of images of the user, each encoded in base64  
+`loginhelper(username,uris)`
 
 
 
-There is an example of Flask Backend usage that will run with the front end provided as hello_flask.py
+Examples:
+## Try It Out!
+To try a proof of concept of our software, go to our hello_flask folder in docker-files do the following  
+1) start docker
+2) docker build -t hello_flask .
+3) docker run --name hello_flask hello_flask
+4) Go to 
 
+## Sample Website
+We integrated our software into a clone of usesparespace.com and using a similar mongodb backend, we've passed  
+on the values we needed in some of their other fields since we had limited experience with React.  
+To start up a clone you must have the following installed in addition to our installation docs:
+
+1. [React](https://reactjs.org/)
+2. [Express.js](https://expressjs.com/)
+3. [Mongodb](https://www.mongodb.com/)
+4. [Node.js](https://nodejs.org/en/)
+
+Then once npm is installed, do npm install on each of the following:
+5. [travis-ci](https://travis-ci.org/)
+6. [mocha](https://mochajs.org/)
+7. [eslint](https://eslint.org/)
+8. [chai](http://chaijs.com/)
+9. [nodemailer](https://nodemailer.com/about/)
+10. [mongoose](http://mongoosejs.com/)
+
+then navigate to the sparespacefrontend folder and run
+`npm install && npm start`  
+do the same but inside the sparespacedevelop folder. After which, the sparespace clone website should open up  
+
+then build and run our container  
+1) Starting Docker
+2) Navigate to our docker-files folder in terminal/console
+3) navigate to the redPanda folder
+4) execute `docker build -t cont1 .`
+5) execute `docker run --name cont1 cont1`
+
+and the site should have a functioning sign up and log in!  
 

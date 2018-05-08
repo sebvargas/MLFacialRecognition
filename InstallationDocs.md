@@ -19,14 +19,6 @@ https://www.docker.com/kubernetes#/CE
 7) Use the urihelper.js file
 8) Refer to API Docs on how to call its functions 
 
-
-## Try It Out!
-To try a proof of concept of our software, go to our hello_flask folder in docker-files do the following  
-1) start docker
-2) docker build -t hello_flask .
-3) docker run --name hello_flask hello_flask
-4) Go to 
-
 ## Troubleshooting:
 
 Taken from https://docs.docker.com/install/linux/linux-postinstall/  

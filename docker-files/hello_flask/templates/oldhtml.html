@@ -90,11 +90,19 @@ and open the template in the editor.
                 var dataURL = canvas.toDataURL();
                 images = images + dataURL;
                 document.getElementById('imageUrl').value = images;
+                        $(".submitBtn").attr("disabled", true);
+
             }
             document.getElementById("canvas").appendChild(convertCanvasToImage(canvas));
 
             }, false);
        
+$(document).ready(function () {
+    $(".submitBtn").click(function () {
+        $(".submitBtn").attr("disabled", true);
+        return true;
+    });
+});
 
 </script>
 
@@ -107,7 +115,7 @@ and open the template in the editor.
     <input id="snap" type="submit" id="snap" value="Log in">
 </form>
 <form method="post" action="/back">
-    <input type="submit" value="back">
+    <input type="submit" class="submitBtn" value="back">
 </form>
 </center>
 
