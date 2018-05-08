@@ -110,6 +110,22 @@ def login(image_URIs,confidence):
 
 ## React Backend
 
+We have a uriHelper.js file that can be imported into a Node.js backend.  
+The file can be found in the docker-files folder
+Simply import the module and the following functions can be called where they are necessary  
+  
+
+// Takes the username and the picture of the user when they register and returns an   // error if the user was not successfully registered  
+// username must be a string  
+// uri must be the URI of the image that is encoded in base64  
+registerHelper(username, uri)
+
+// Takes the username and an array of URIs of pictures of the user and     
+// returns true if the user is verified and false otherwise  
+// username must be a string  
+// uris must be an array of images of the user, each encoded in base64  
+loginhelper(username,uris)
+
 
 
 There is an example of Flask Backend usage that will run with the front end provided as hello_flask.py
