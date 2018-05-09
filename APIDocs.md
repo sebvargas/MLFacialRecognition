@@ -209,7 +209,7 @@ To start up a clone you must have the following installed in addition to our ins
 3. [Mongodb](https://www.mongodb.com/)
 4. [Node.js](https://nodejs.org/en/)
 
-Then once npm is installed, do npm install on each of the following:
+Then once npm is installed, do npm install on each of the following:  
 5. [travis-ci](https://travis-ci.org/)  
 6. [mocha](https://mochajs.org/)  
 7. [eslint](https://eslint.org/)  
