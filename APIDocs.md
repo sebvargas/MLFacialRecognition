@@ -27,7 +27,7 @@ You can also implement your own camera if you wish, as long as you pass the righ
 ```javascript
 <script>  
             var count = 0;  
-            var num_of_images = 5;  
+            var num_of_images = 3;  
             var images = "";  
             window.addEventListener("DOMContentLoaded", function() {  
             // Grab elements, create settings, etc.  
@@ -165,7 +165,8 @@ This function would be called when the user registers for a new account
 returns username  
  logs a user into an account that has been tied to their face or  
  fails a log in if a user has not been registered yet.  
- @params image_URI are the images that have been taken of the user given as an array of images  
+ @params image_URI are the 3 images that have been taken of the user given as an array of images  
+ where it is the picture of the front of their face, their left face profile and right face profile in that order
 `def login(image_URIs,confidence): ` 
 
 ## React Backend
@@ -184,7 +185,7 @@ error if the user was not successfully registered
 Takes the username and an array of URIs of pictures of the user and     
 returns true if the user is verified and false otherwise  
 @username must be a string  
-@uris must be an array of images of the user, each encoded in base64  
+@uris must be an array of 3 images of the user where it is the picture of the front of their face, their left face profile and right   face profile in that order, each encoded in base64  
 `loginhelper(username,uris)`
 
 
