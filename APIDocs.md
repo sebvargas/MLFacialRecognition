@@ -20,7 +20,8 @@ time series to detect
 (2) Whether the camera is not being tricked by a physical photo of the valid user
 
 The variable `num_of_images` determines how many photos of the user we would take,
-the more photos we take, the harder it becomes to fool our software  
+the more photos we take, the harder it becomes to fool our software. As of right now, we only have it capable of taking  
+3 photos for logging in.  
 
 You can also implement your own camera if you wish, as long as you pass the right arguments onto our backend
 
